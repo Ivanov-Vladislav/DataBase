@@ -10,21 +10,27 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
       <div class="row">
-        <a href="{% url 'home' %}" class="navbar-brand">Chicony</a>
+        <a href="{% url 'home' %}" class="navbar-brand">Chicony-IVV</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'home' %}">Главная</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">О нас</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'create' %}">Создать задачу</a>
+              <a class="nav-link" href="{% url 'createtask' %}">Создать задачу</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'createhuman' %}">Создать сотрудника</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin">Sing up</a>
             </li>
           </ul>
         </div>
