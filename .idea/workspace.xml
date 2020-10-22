@@ -19,7 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="610217fe-bb9f-4109-b016-4b2ec708dbaa" name="Default Changelist" comment="" />
+    <list default="true" id="610217fe-bb9f-4109-b016-4b2ec708dbaa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectDB/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectDB/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectDB/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectDB/urls.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,6 +92,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1603289370844">
