@@ -11,7 +11,10 @@ def about(request):
 def tasks(request):
     tasks = Task.objects.all()
     humans = Human.objects.all()
-    return render(request, 'main/tasks.html', {'title': 'Главная', 'tasks': tasks, 'humans': humans})
+    return render(request, 'main/tasks.html', {'tasks': tasks, 'humans': humans})
+
+def signIn(request):
+    return render(request, 'main/signIn.html')
 
 def createtask(request):
     error = ''

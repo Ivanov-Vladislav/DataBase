@@ -20,15 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="610217fe-bb9f-4109-b016-4b2ec708dbaa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/template/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/main/signIn.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectDB/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectDB/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/tasks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/createhuman.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/createhuman.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/createtask.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/createtask.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
@@ -44,8 +39,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -87,7 +82,7 @@
       <workItem from="1603271792929" duration="799000" />
       <workItem from="1603273178318" duration="3805000" />
       <workItem from="1603289352778" duration="20000" />
-      <workItem from="1603537430741" duration="15868000" />
+      <workItem from="1603537430741" duration="19674000" />
     </task>
     <servers />
   </component>
