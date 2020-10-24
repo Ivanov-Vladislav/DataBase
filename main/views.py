@@ -3,13 +3,15 @@ from .models import Task, Human
 from .forms import TaskForm, HumanForm
 
 def index(request):
-    tasks = Task.objects.all()
-    humans = Human.objects.all()
-    return render(request, 'main/index.html', {'title': 'Главная', 'tasks': tasks, 'humans': humans})
+    return render(request, 'main/index.html')
 
 def about(request):
     return render(request, 'main/about.html')
 
+def tasks(request):
+    tasks = Task.objects.all()
+    humans = Human.objects.all()
+    return render(request, 'main/tasks.html', {'title': 'Главная', 'tasks': tasks, 'humans': humans})
 
 def createtask(request):
     error = ''

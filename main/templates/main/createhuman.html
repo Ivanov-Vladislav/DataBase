@@ -5,14 +5,16 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Создать сотрудника</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.Surname }}<br>
-    {{ form.Forename }}<br>
-    {{ form.age }}<br>
-    {{ form.evulation_work }}<br>
-    <button type="submit" class="btn btn-success">Добавить</button>
-    <span>{{ error }}</span>
-  </form>
+  <div class="container">
+    <h1>Создать сотрудника</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.Surname }}<br>
+      {{ form.Forename }}<br>
+      {{ form.age }}<br>
+      {{ form.evulation_work }}<br>
+      <button type="submit" class="btn btn-success">Добавить</button>
+      <span>{{ error }}</span>
+    </form>
+  </div>
 {% endblock %}

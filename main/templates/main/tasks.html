@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Задачи</h1>
+    {% if tasks %}
+    {% for el in tasks %}
+    <div class="alert alert-warning mt-2">
+      <h3>{{ el.title }}</h3>
+      <p>{{ el.task }}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Нет задач</p>
+    {% endif %}
+    <h2>Сотрудники</h2>
+    {% if humans %}
+    {% for el in humans %}
+    <div class="alert alert-warning mt-2">
+      <h5>{{ el.Forename }}</h5>
+      <p>{{ el.Surname }}</p>
+      <p>{{ el.age }}</p>
+      <p>{{ el.evulation_work }}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Нет сотрудников</p>
+    {% endif %}
+    <h4>Команды</h4>
+  </div>
+{% endblock %}

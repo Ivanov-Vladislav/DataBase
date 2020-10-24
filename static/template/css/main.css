@@ -1,0 +1,10 @@
+.banner {
+    padding-top: 200px;
+    padding-bottom: 312px;
+    background: url("../image/background-main.jpg") center;
+}
+.main-title {
+    text-align: center;
+    padding-bottom: 35px;
+    color: #f8f9fa;
+}

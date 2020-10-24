@@ -5,29 +5,19 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Задачи</h1>
-  {% if tasks %}
-    {% for el in tasks %}
-      <div class="alert alert-warning mt-2">
-        <h3>{{ el.title }}</h3>
-        <p>{{ el.task }}</p>
+  <div class="container-fluid banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 main-title">
+          <h1 class="mb-3">Project To Do</h1>
+          <span>To Do поможет вам сосредоточиться</span>
+          <br>
+          <span>на любом занятии — от работы до игры.</span>
+        </div>
+        <div class="col-12 text-center">
+          <a href="{% url 'tasks' %}" role="button" class="btn btn-outline-light">Начать работу</a>
+        </div>
       </div>
-    {% endfor %}
-  {% else %}
-    <p>Нет задач</p>
-  {% endif %}
-  <h2>Сотрудники</h2>
-  {% if humans %}
-    {% for el in humans %}
-      <div class="alert alert-warning mt-2">
-        <h5>{{ el.Forename }}</h5>
-        <p>{{ el.Surname }}</p>
-        <p>{{ el.age }}</p>
-        <p>{{ el.evulation_work }}</p>
-      </div>
-    {% endfor %}
-  {% else %}
-    <p>Нет сотрудников</p>
-  {% endif %}
-  <h4>Команды</h4>
+    </div>
+  </div>
 {% endblock %}
