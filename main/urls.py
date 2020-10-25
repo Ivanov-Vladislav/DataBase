@@ -9,4 +9,5 @@ urlpatterns = [
     path('createtask', views.createtask, name='createtask'),
     path('createhuman', views.createhuman, name='createhuman'),
     path('sign-in', views.signIn, name='sign-in'),
+    path('sign-up', views.signUp.as_view(), name='sign-up'),
 ]

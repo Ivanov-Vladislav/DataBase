@@ -1,5 +1,7 @@
 from .models import Task, Human
 from django.forms import ModelForm, TextInput, Textarea
+from django.contrib.auth.forms import UserCreationForm
+
 
 class TaskForm(ModelForm):
     class Meta:
@@ -28,6 +30,7 @@ class TaskForm(ModelForm):
             }),
         }
 
+
 class HumanForm(ModelForm):
     class Meta:
         model = Human
@@ -50,3 +53,15 @@ class HumanForm(ModelForm):
                 'placeholder': 'Оценка работы'
             }),
         }
+
+
+class CreateUserForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for fieldname in ['username', 'password1', 'password2']:
+            self.fields[fieldname].widget.attrs = {'class': 'form-control form-control-sm'}
+
+
+
+

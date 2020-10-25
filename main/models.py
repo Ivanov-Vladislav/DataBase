@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Task(models.Model):
     title = models.CharField('Название', max_length=20)
     time = models.CharField('Время выполнения', max_length=15)
@@ -14,6 +15,7 @@ class Task(models.Model):
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
 
+
 class Human(models.Model):
     Surname = models.CharField('Имя', max_length=20)
     Forename = models.CharField('Фамилия', max_length=20)
@@ -26,4 +28,5 @@ class Human(models.Model):
     class Meta:
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
+
 
