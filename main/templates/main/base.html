@@ -9,8 +9,8 @@
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-    <div class="container">
+  <nav class="navbar navbar-expand-md navbar-dark sticky-top">
+    <div class="container border-bottom">
       <a href="{% url 'home' %}" class="navbar-brand">Todo</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,25 +19,25 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'home' %}">Главная</a>
+            <a class="nav-link text-light" href="{% url 'home' %}">Главная</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'about' %}">О нас</a>
+            <a class="nav-link text-light" href="{% url 'about' %}">О нас</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'tasks' %}">Задачи</a>
+            <a class="nav-link text-light" href="{% url 'tasks' %}">Задачи</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'createtask' %}">Создать задачу</a>
+            <a class="nav-link text-light" href="{% url 'createtask' %}">Создать задачу</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'createhuman' %}">Создать сотрудника</a>
+            <a class="nav-link text-light" href="{% url 'createhuman' %}">Создать сотрудника</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admin">Admin</a>
+            <a class="nav-link text-light" href="admin">Admin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'sign-in' %}">Вход</a>
+            <a class="nav-link text-light" href="{% url 'sign-in' %}">Вход</a>
           </li>
         </ul>
       </div>
