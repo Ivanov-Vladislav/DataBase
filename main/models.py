@@ -14,19 +14,3 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
-
-
-class Human(models.Model):
-    Surname = models.CharField('Имя', max_length=20)
-    Forename = models.CharField('Фамилия', max_length=20)
-    age = models.CharField('Возраст', max_length=2)
-    evulation_work = models.CharField('Качество работы', max_length=20)
-
-    def __str__(self):
-        return self.Surname
-
-    class Meta:
-        verbose_name = 'Сотрудник'
-        verbose_name_plural = 'Сотрудники'
-
-

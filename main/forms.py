@@ -1,4 +1,4 @@
-from .models import Task, Human
+from .models import Task
 from django.forms import ModelForm, TextInput, Textarea
 from django.contrib.auth.forms import UserCreationForm
 
@@ -27,30 +27,6 @@ class TaskForm(ModelForm):
             "task": Textarea(attrs={
                  'class': 'form-control',
                  'placeholder': 'Введите описание'
-            }),
-        }
-
-
-class HumanForm(ModelForm):
-    class Meta:
-        model = Human
-        fields = ["Surname", "Forename", "age", "evulation_work"]
-        widgets = {
-            "Surname": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите имя'
-            }),
-            "Forename": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите фамилию'
-            }),
-            "age": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Возраст'
-            }),
-            "evulation_work": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Оценка работы'
             }),
         }
 

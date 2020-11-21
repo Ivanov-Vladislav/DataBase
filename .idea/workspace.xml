@@ -21,9 +21,17 @@
   <component name="ChangeListManager">
     <list default="true" id="610217fe-bb9f-4109-b016-4b2ec708dbaa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/about.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/signIn.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/registration/signIn.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/signUp.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/registration/signUp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/createhuman.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/createtask.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/createtask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +64,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/main/templates/main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -87,6 +95,7 @@
       <workItem from="1603289352778" duration="20000" />
       <workItem from="1603537430741" duration="20217000" />
       <workItem from="1603612674561" duration="1767000" />
+      <workItem from="1603728226397" duration="65000" />
     </task>
     <servers />
   </component>
@@ -114,10 +123,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="53" key="#Plugins/0.0.1536.824@0.0.1536.824" timestamp="1603616321761" />
-    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1603289370844">
+    <state x="526" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605950852203">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603289370844" />
+    <state x="526" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1605950852203" />
+    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1603728288092">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603728288092" />
     <state x="349" y="147" key="IDE.errors.dialog" timestamp="1603617574547">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
