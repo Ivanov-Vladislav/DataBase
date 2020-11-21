@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
-from .models import Task, Human
-from .forms import TaskForm, HumanForm, CreateUserForm
+from .models import Task
+from .forms import TaskForm, CreateUserForm
 
 
 def index(request):
@@ -14,8 +14,7 @@ def about(request):
 
 def tasks(request):
     tasks = Task.objects.all()
-    humans = Human.objects.all()
-    return render(request, 'main/tasks.html', {'tasks': tasks, 'humans': humans})
+    return render(request, 'main/tasks.html', {'tasks': tasks})
 
 
 def signIn(request):
@@ -52,21 +51,3 @@ def createtask(request):
         'error': error
     }
     return render(request, 'main/createtask.html', context)
-
-
-def createhuman(request):
-    error = ''
-    if request.method == 'POST':
-        form = HumanForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            error = 'Форма неверная'
-
-    form = HumanForm()
-    context = {
-        'form': form,
-        'error': error
-    }
-    return render(request, 'main/createhuman.html', context)
