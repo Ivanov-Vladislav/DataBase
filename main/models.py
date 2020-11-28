@@ -2,14 +2,14 @@ from django.db import models
 
 
 class Task(models.Model):
-    title = models.CharField('Название', max_length=20)
-    time = models.CharField('Время выполнения', max_length=15)
-    difficulty = models.CharField('Сложность', max_length=15)
-    num_people = models.CharField('Количество людей', max_length=2)
-    task = models.TextField('Описание')
+    name = models.CharField('Название', max_length=20)
+    description = models.CharField('Описание', max_length=45)
+    date = models.CharField('Дата', max_length=15)
+    id_person = models.CharField('Создатель', max_length=20)
+    id_status = models.CharField('Статус', max_length=20)
 
     def __str__(self):
-        return self.title
+        return self.name
 
     class Meta:
         verbose_name = 'Задача'

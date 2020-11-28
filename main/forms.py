@@ -6,27 +6,27 @@ from django.contrib.auth.forms import UserCreationForm
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ["title", "time", "difficulty", "num_people", "task"]
+        fields = ["name", "description", "date", "id_person", "id_status"]
         widgets = {
-            "title": TextInput(attrs={
+            "name": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите название'
             }),
-            "time": TextInput(attrs={
+            "description": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Продолжительность'
+                'placeholder': 'Описание'
             }),
-            "difficulty": TextInput(attrs={
+            "date": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Сложность работы'
+                'placeholder': 'Дата'
             }),
-            "num_people": TextInput(attrs={
+            "id_person": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Количество людей'
+                'placeholder': 'Создатель'
             }),
-            "task": Textarea(attrs={
+            "id_status": Textarea(attrs={
                  'class': 'form-control',
-                 'placeholder': 'Введите описание'
+                 'placeholder': 'Статус'
             }),
         }
 
