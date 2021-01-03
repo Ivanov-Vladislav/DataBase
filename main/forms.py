@@ -1,37 +1,35 @@
-from .models import Task, Human
+from .models import Human, Task1
 from django.forms import ModelForm, TextInput, Textarea
 
-class TaskForm(ModelForm):
+class Task1Form(ModelForm):
     class Meta:
-        model = Task
-        fields = ["title", "time", "difficulty", "num_people", "task"]
+        model = Task1
+        fields = ["title", "description", "date", "id_status"]
         widgets = {
             "title": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите название'
             }),
-            "time": TextInput(attrs={
+            "description": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Продолжительность'
+                'placeholder': 'Описание'
             }),
-            "difficulty": TextInput(attrs={
+            "date": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Сложность работы'
+                'placeholder': 'Дата'
             }),
-            "num_people": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Количество людей'
-            }),
-            "task": Textarea(attrs={
+            "id_status": Textarea(attrs={
                  'class': 'form-control',
-                 'placeholder': 'Введите описание'
+                 'placeholder': 'Статус'
             }),
         }
+
+
 
 class HumanForm(ModelForm):
     class Meta:
         model = Human
-        fields = ["Surname", "Forename", "age", "evulation_work"]
+        fields = ["Surname", "Forename", "ages", "evulation_work"]
         widgets = {
             "Surname": TextInput(attrs={
                 'class': 'form-control',
@@ -41,7 +39,7 @@ class HumanForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Введите фамилию'
             }),
-            "age": TextInput(attrs={
+            "ages": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Возраст'
             }),
@@ -50,3 +48,4 @@ class HumanForm(ModelForm):
                 'placeholder': 'Оценка работы'
             }),
         }
+

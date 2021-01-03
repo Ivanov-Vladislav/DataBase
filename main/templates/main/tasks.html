@@ -11,7 +11,7 @@
     {% for el in tasks %}
     <div class="alert alert-warning mt-2">
       <h3>{{ el.title }}</h3>
-      <p>{{ el.task }}</p>
+      <p>{{ el.description }}</p>
     </div>
     {% endfor %}
     {% else %}
@@ -23,7 +23,7 @@
     <div class="alert alert-warning mt-2">
       <h5>{{ el.Forename }}</h5>
       <p>{{ el.Surname }}</p>
-      <p>{{ el.age }}</p>
+      <p>{{ el.ages }}</p>
       <p>{{ el.evulation_work }}</p>
     </div>
     {% endfor %}
