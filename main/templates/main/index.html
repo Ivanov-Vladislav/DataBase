@@ -1,20 +1,22 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-  Project To Do
+{{ title }}
 {% endblock %}
 
 {% block content %}
-  <div class="container main">
-    <div class="row">
-      <div class="col-12 main-title">
-        <h1 class="mb-3">Project To Do</h1>
-        <span>To Do поможет вам сосредоточиться</span>
-        <br>
-        <span>на любом занятии — от работы до игры.</span>
-      </div>
-      <div class="col-12 text-center">
-        <a href="{% url 'sign-in' %}" role="button" class="btn btn-outline-light">Начать работу</a>
+  <div class="container-fluid banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 main-title">
+          <h1 class="mb-3">Project To Do</h1>
+          <span>To Do поможет вам сосредоточиться</span>
+          <br>
+          <span>на любом занятии — от работы до игры.</span>
+        </div>
+        <div class="col-12 text-center">
+          <a href="{% url 'tasks' %}" role="button" class="btn btn-outline-light">Начать работу</a>
+        </div>
       </div>
     </div>
   </div>

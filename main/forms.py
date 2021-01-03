@@ -1,43 +1,52 @@
-from .models import Task
+from .models import Task, Human
 from django.forms import ModelForm, TextInput, Textarea
-from django.contrib.auth.forms import UserCreationForm
-
 
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ["name", "description", "date", "id_person", "id_status"]
+        fields = ["title", "time", "difficulty", "num_people", "task"]
         widgets = {
-            "name": TextInput(attrs={
+            "title": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите название'
             }),
-            "description": TextInput(attrs={
+            "time": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Описание'
+                'placeholder': 'Продолжительность'
             }),
-            "date": TextInput(attrs={
+            "difficulty": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата'
+                'placeholder': 'Сложность работы'
             }),
-            "id_person": TextInput(attrs={
+            "num_people": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Создатель'
+                'placeholder': 'Количество людей'
             }),
-            "id_status": Textarea(attrs={
+            "task": Textarea(attrs={
                  'class': 'form-control',
-                 'placeholder': 'Статус'
+                 'placeholder': 'Введите описание'
             }),
         }
 
-
-class CreateUserForm(UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        for fieldname in ['username', 'password1', 'password2']:
-            self.fields[fieldname].widget.attrs = {'class': 'form-control form-control-sm'}
-
-
-
-
+class HumanForm(ModelForm):
+    class Meta:
+        model = Human
+        fields = ["Surname", "Forename", "age", "evulation_work"]
+        widgets = {
+            "Surname": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите имя'
+            }),
+            "Forename": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите фамилию'
+            }),
+            "age": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Возраст'
+            }),
+            "evulation_work": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Оценка работы'
+            }),
+        }

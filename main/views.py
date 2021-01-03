@@ -1,39 +1,17 @@
 from django.shortcuts import render, redirect
-from django.views.generic import View
-from .models import Task
-from .forms import TaskForm, CreateUserForm
-
+from .models import Task, Human
+from .forms import TaskForm, HumanForm
 
 def index(request):
     return render(request, 'main/index.html')
 
-
 def about(request):
     return render(request, 'main/about.html')
 
-
 def tasks(request):
     tasks = Task.objects.all()
-    return render(request, 'main/tasks.html', {'tasks': tasks})
-
-
-def signIn(request):
-    return render(request, 'main/registration/signIn.html')
-
-
-class signUp(View):
-    def get(self, request):
-        form = CreateUserForm()
-        return render(request, 'main/registration/signUp.html', {'form': form})
-
-    def post(self, request):
-        bound_form = CreateUserForm(request.POST)
-
-        if bound_form.is_valid():
-            new_user = bound_form.save()
-            return render(request, 'main/registration/signIn.html')
-        return render(request, 'main/registration/signUp.html', {'form': bound_form})
-
+    humans = Human.objects.all()
+    return render(request, 'main/tasks.html', {'title': 'Главная', 'tasks': tasks, 'humans': humans})
 
 def createtask(request):
     error = ''
@@ -51,3 +29,20 @@ def createtask(request):
         'error': error
     }
     return render(request, 'main/createtask.html', context)
+
+def createhuman(request):
+    error = ''
+    if request.method == 'POST':
+        form = HumanForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            error = 'Форма неверная'
+
+    form = HumanForm()
+    context = {
+        'form': form,
+        'error': error
+    }
+    return render(request, 'main/createhuman.html', context)
