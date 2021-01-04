@@ -1,13 +1,41 @@
+.main {
+    background: url("../image/background-main.jpg") no-repeat center top fixed;
+    background-size: cover;
+}
+
 body {
-    background-color: #778994;
+    background-color: ;
 }
-.banner {
-    padding-top: 200px;
-    padding-bottom: 312px;
-    background: url("../image/background-main.jpg") center;
-}
-.main-title {
-    text-align: center;
-    padding-bottom: 35px;
+
+.main-section {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -20%);
     color: #f8f9fa;
+}
+
+.form-block {
+    width: 350px;
+    background-color: #343a40;
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.form p {
+    margin-bottom: 8px;
+}
+
+.form p label {
+    display: block;
+}
+
+.form p:last-of-type label {
+    display: inline-block;
+}
+
+.form p input:not(#id_remember) {
+    border-radius: 4px;
+    width: 100%;
+    height: 35px;
 }

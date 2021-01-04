@@ -22,13 +22,16 @@
     <list default="true" id="610217fe-bb9f-4109-b016-4b2ec708dbaa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/account/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/account/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/account/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/account/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/account/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/account/logout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/account/password_reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/account/password_reset.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/account/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/account/signup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/createtask.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/createtask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/main/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/tasks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/template/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/template/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/template/image/background-main.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/template/image/background-main.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
