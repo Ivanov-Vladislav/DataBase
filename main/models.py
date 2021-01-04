@@ -5,12 +5,7 @@ class Task1(models.Model):
     description = models.TextField('Описание')
     date = models.CharField('Дата', max_length=10)
     id_person = models.CharField('Создатель', max_length=10)
-    CHOICES = (
-        ('High', 'High'),
-        ('Medium', 'Medium'),
-        ('Low', 'Low'),
-    )
-    id_status = models.CharField(max_length=300, choices = CHOICES)
+    id_status = models.CharField(max_length=300)
     id_performing_person = models.CharField('Исполнитель', max_length=20)
 
     def __str__(self):

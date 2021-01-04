@@ -12,10 +12,10 @@ def about(request):
 def tasks(request):
     tasks = Task1.objects.all()
     humans = Human.objects.all()
-    Status = status.objects.all()
-    return render(request, 'main/tasks.html', {'title': 'Главная', 'tasks': tasks, 'humans': humans, 'Status':Status})
+    return render(request, 'main/tasks.html', {'title': 'Главная', 'tasks': tasks, 'humans': humans})
 
 def createtask(request):
+    Status = status.objects.all()
     if not(str(request.user) == 'AnonymousUser'):
         error = ''
         if request.method == 'POST':
@@ -34,7 +34,8 @@ def createtask(request):
         form = Task1Form()
         context = {
             'form': form,
-            'error': error
+            'error': error,
+            'Status': Status
         }
         return render(request, 'main/createtask.html', context)
     else:

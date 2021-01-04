@@ -36,24 +36,27 @@
           <li class="nav-item">
             <a class="nav-link" href="admin">Admin</a>
           </li>
-          <li>
-            {% if user.is_authenticated %}
-            <span style="color: #808080;">{{user.username }} </span>
-              <a href="{% url 'account_logout' %}"
-                style="color: grb(255,255,255); font-weight:700; text-transform: uppercase;">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <span class="nav-link">{{user.username }} </span>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_logout' %}">
                 Выход
               </a>
+          </li>
               {% else %}
-              <a href="{% url 'account_login' %}"
-                style="color: grb(255,255,255); font-weight:700; text-transform: uppercase;">
+          <li class="nav-item font-weight-bold">
+              <a class="nav-link" href="{% url 'account_login' %}">
                 Вход
               </a>
-              <a href="{% url 'account_signup' %}"
-                style="color: grb(255,255,255); font-weight:700; text-transform: uppercase;">
+          </li>
+            <li class="nav-item font-weight-bold">
+              <a class="nav-link" href="{% url 'account_signup' %}">
                 Регистрация
               </a>
+            </li>
             {% endif %}
-          </li>
         </ul>
       </div>
     </div>
