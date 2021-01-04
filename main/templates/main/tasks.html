@@ -5,25 +5,41 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h1>Задачи</h1>
+  <a class="container">
+    <center>
+    <h1 style="color:#ffffff">Задачи</h1>
     {% if tasks %}
     {% for el in tasks %}
+    {% if el.id_performing_person == "Свободна для выполнения" %}
+    <div class="alert alert-warning mt-2">
+    <a class="alert alert-warning mt-2" href="{% url 'id_performing_person' el.id %}">
+      <h3>{{ el.title }}</h3>
+      <p>Описание: {{ el.description }}</p>
+      <p>Дата создания: {{ el.date }}</p>
+      <p>Создатель: {{ el.id_person }}</p>
+      <p>Статус: {{ el.id_status }}</p>
+      <p>{{ el.id_performing_person }}</p>
+    </a>
+    </div>
+    {% else %}
     <div class="alert alert-warning mt-2">
       <h3>{{ el.title }}</h3>
-      <p>{{ el.description }}</p>
-      <p>{{ el.date }}</p>
-      <p>{{ el.id_person }}</p>
-      <p>{{ el.id_status }}</p>
+      <p>Описание: {{ el.description }}</p>
+      <p>Дата создания: {{ el.date }}</p>
+      <p>Создатель: {{ el.id_person }}</p>
+      <p>Статус: {{ el.id_status }}</p>
+      <p>Исполнитель: {{ el.id_performing_person }}</p>
     </div>
+    {% endif %}
     {% endfor %}
     {% else %}
-    <p>Нет задач</p>
+    <p style="color:#ffffff">Нет задач</p>
     {% endif %}
-    <h2>Сотрудники</h2>
+    <h2 style="color:#ffffff">Сотрудники</h2>
     {% if humans %}
     {% for el in humans %}
-    <div class="alert alert-warning mt-2">
+
+    <div class="alert alert-warning mt-2;">
       <h5>{{ el.Forename }}</h5>
       <p>{{ el.Surname }}</p>
       <p>{{ el.ages }}</p>
@@ -31,8 +47,8 @@
     </div>
     {% endfor %}
     {% else %}
-    <p>Нет сотрудников</p>
+    <p style="color:#ffffff">Нет сотрудников</p>
     {% endif %}
-    <h4>Команды</h4>
+    </center>
   </div>
 {% endblock %}

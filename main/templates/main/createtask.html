@@ -12,8 +12,15 @@
       {{ form.title }}<br>
       {{ form.description }}<br>
       {{ form.date }}<br>
-      {{ form.id_status }}<br>
+
+      <select name="id_status" id="id_status">
+        <option value="High">Высокий</option>
+        <option value="Medium">Средний</option>
+        <option value="Low">Слабый</option>
+      </select>
+
       <button type="submit" class="btn btn-success">Добавить</button>
+      <button type="reset" class="btn btn-success">Очистить</button>
       <span>{{ error }}</span>
     </form>
   </div>

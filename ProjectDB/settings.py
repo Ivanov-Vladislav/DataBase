@@ -130,7 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/tasks'
 
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUT_USERNAME_MIN_LENGTH = 4

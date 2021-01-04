@@ -1,4 +1,4 @@
-from .models import Human, Task1
+from .models import Human, Task1, status
 from django.forms import ModelForm, TextInput, Textarea
 
 class Task1Form(ModelForm):
@@ -17,6 +17,17 @@ class Task1Form(ModelForm):
             "id_status": Textarea(attrs={
                  'class': 'form-control',
                  'placeholder': 'Статус'
+            }),
+        }
+
+class statusform(ModelForm):
+    class Meta:
+        model = status
+        fields = ["name"]
+        widgets = {
+            "name": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название'
             }),
         }
 
