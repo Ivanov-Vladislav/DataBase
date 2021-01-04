@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Task1, Human
 from .forms import Task1Form, HumanForm
+import datetime
 
 def index(request):
     return render(request, 'main/index.html')
@@ -19,7 +20,11 @@ def createtask(request):
         if request.method == 'POST':
             form = Task1Form(request.POST)
             if form.is_valid():
-                form.save()
+                post = form.save(commit=False)
+                post.id_person = request.user
+                date_now = str(datetime.datetime.now())
+                post.date = date_now[0:10]
+                post.save()
                 return redirect('home')
             else:
                 error = 'Форма неверная'
@@ -45,6 +50,7 @@ def createhuman(request):
             error = 'Форма неверная'
 
     form = HumanForm()
+    form.ages = '!!'
     context = {
         'form': form,
         'error': error
