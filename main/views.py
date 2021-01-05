@@ -19,7 +19,7 @@ def tasks(request):
     if humas_auth_bool == False:
         return redirect('createhuman')
     tasks = Task1.objects.all()
-    return render(request, 'main/tasks.html', {'title': 'Главная', 'tasks': tasks})
+    return render(request, 'main/tasks.html', {'title': 'Задачи', 'tasks': tasks})
 
 def createtask(request):
     Status = status.objects.all()
@@ -40,7 +40,7 @@ def createtask(request):
                 post.id_person = request.user
                 date_now = str(datetime.datetime.now())
                 post.date = date_now[0:10]
-                post.id_performing_person = "Свободна для выполнения"
+                post.id_performing_person = "-"
                 post.id_status = "Свободно"
                 post.save()
                 return redirect('tasks')
@@ -57,7 +57,7 @@ def createtask(request):
     else:
         return redirect('accounts/login/')
 
-def id_performing_personTodo(request, todo_id):
+def id_performing_personTodo(request, todo_id, cancel = False):
     if not (str(request.user) == 'AnonymousUser'):
         humans = Human.objects.all()
         humas_auth_bool = False

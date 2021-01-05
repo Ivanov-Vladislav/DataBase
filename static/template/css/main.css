@@ -2,11 +2,6 @@
     background: url("../image/background-main.jpg") no-repeat center top fixed;
     background-size: cover;
 }
-
-body {
-    background-color: ;
-}
-
 .main-section {
     position: absolute;
     top: 35%;
@@ -38,4 +33,12 @@ body {
     border-radius: 4px;
     width: 100%;
     height: 35px;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #343a40;
+}
+
+.subtitle-task {
+    font-size: 14px;
 }

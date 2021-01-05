@@ -5,30 +5,60 @@
 {% endblock %}
 
 {% block content %}
-<div class="container text-center">
-    <h2 class="text-light mt-3">Задачи</h2>
-    {% if tasks %}
-        {% for el in tasks %}
-            <div class="alert alert-warning mt-2">
-                <h3>{{ el.title }}</h3>
-                <p>Описание: {{ el.description }}</p>
-                <p>Дата создания: {{ el.date }}</p>
-                <p>Создатель: {{ el.id_person }}</p>
-                <p>Статус: {{ el.id_status }}</p>
-                {% if el.id_status == "Свободно" %}
-                    <a class="btn" href="{% url 'id_performing_person' el.id %}"><img src="button.jpg">Взять</a>
-                {% endif %}
-                {% if el.id_status == "Выполняется" %}
-                    <p>Выполняет: {{ el.id_performing_person }}</p>
-                    <a class="btn" href="{% url 'id_performing_person' el.id %}"><img src="button.jpg">Сдать</a>
-                {% endif %}
-                {% if el.id_status == "Готово" %}
-                    <p>Выполнил: {{ el.id_performing_person }}</p>
-                {% endif %}
+<div class="container">
+  {% if tasks %}
+  <h2 class="text-light text-center mt-5">{{ title }}</h2>
+  <div class="accordion mt-4" id="accordionTable">
+    {% for el in tasks %}
+    <div class="card text-white bg-dark">
+      <a class="text-light text-decoration-none" type="button" data-toggle="collapse" data-target="#id{{ el.id }}"
+         aria-expanded="true" aria-controls="collapseOne" href="#">
+        <div class="card-header d-flex justify-content-between">
+          <h5>{{ el.title }}</h5>
+          {% if el.id_status == "Готово" %}
+          <span class="mt-1 text-success">{{ el.id_status }}</span>
+          {% elif el.id_status == "Выполняется" %}
+          <span class="mt-1 text-warning">{{ el.id_status }}</span>
+          {% else %}
+          <span class="mt-1 text-info">{{ el.id_status }}</span>
+          {% endif %}
+        </div>
+      </a>
+      <div id="id{{ el.id }}" class="collapse" data-parent="#accordionTable">
+        <div class="card-body bg-secondary">
+          <div class="border-bottom border-dark">
+            <div class="d-flex">
+              <p class="text-uppercase">Описание:</p>
+              <p class="ml-3">{{ el.description }}</p>
             </div>
-        {% endfor %}
-    {% else %}
-        <p>Нет задач</p>
-    {% endif %}
+            <div class="d-flex justify-content-end subtitle-task mb-2">
+              <span>{{ el.id_person }}</span>
+              <span class="ml-2">{{ el.date }}</span>
+            </div>
+          </div>
+          <div class="d-flex mt-2 justify-content-between">
+            <div class="d-flex">
+              <span>Исполнитель:</span>
+              <span class="ml-2">{{ el.id_performing_person }}</span>
+            </div>
+            <div class="d-flex">
+              {% if el.id_performing_person == "-" %}
+              <a class="btn btn-sm btn-success" href="{% url 'id_performing_person' el.id %}">Принять</a>
+              {% elif el.id_status == "Готово" %}
+              <a class="btn btn-sm btn-danger" href="{% url 'id_performing_person' el.id %}">Отменить</a>
+              {% else %}
+              <a class="btn btn-sm btn-success" href="{% url 'id_performing_person' el.id %}">Готово</a>
+              <a class="btn btn-sm btn-danger ml-2" href="{% url 'id_performing_person' el.id %}">Отменить</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <h2 class="text-light text-center mt-5">Список задач пуст!</h2>
+  {% endif %}
 </div>
 {% endblock %}
