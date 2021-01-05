@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+  Информация о человеке
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Сотрудник</h1>
+      {% csrf_token %}
+      {{ form.first_name }}<br>
+  </div>
+{% endblock %}

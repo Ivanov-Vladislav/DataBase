@@ -16,13 +16,14 @@ class Task1(models.Model):
         verbose_name_plural = 'Задачи'
 
 class Human(models.Model):
-    Surname = models.CharField('Имя', max_length=20)
-    Forename = models.CharField('Фамилия', max_length=20)
-    ages = models.CharField('Возраст', max_length=2)
-    evulation_work = models.CharField('Качество работы', max_length=20)
+    first_name = models.CharField('Имя', max_length=10)
+    second_name = models.CharField('Фамилия', max_length=15)
+    #avatar = models.CharField('avatar', max_length=2)
+    id_registarion = models.CharField('id при регистрации', max_length=5)
+    id_branch = models.CharField('отдел разработки', max_length=10)
 
     def __str__(self):
-        return self.Surname
+        return self.first_name
 
     class Meta:
         verbose_name = 'Сотрудник'
@@ -37,4 +38,14 @@ class status(models.Model):
     class Meta:
         verbose_name = 'Статус'
         verbose_name_plural = 'Статусы'
+
+class branch(models.Model):
+    name = models.CharField('Наименование отдела', max_length=12)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Отдел'
+        verbose_name_plural = 'Отделы'
 

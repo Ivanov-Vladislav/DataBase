@@ -6,13 +6,18 @@
 
 {% block content %}
   <div class="container">
-    <h1>Создать сотрудника</h1>
+    <h1>Личные данные</h1>
     <form method="post">
       {% csrf_token %}
-      {{ form.Surname }}<br>
-      {{ form.Forename }}<br>
-      {{ form.ages }}<br>
-      {{ form.evulation_work }}<br>
+      {{ form.first_name }}<br>
+      {{ form.second_name }}<br>
+
+      <select name="id_branch" id="id_branch">
+        {% for el in Branch %}
+          <option value="{{ el.name }}">{{ el.name }}</option>
+         {% endfor %}
+      </select>
+
       <button type="submit" class="btn btn-success">Добавить</button>
       <span>{{ error }}</span>
     </form>

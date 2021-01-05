@@ -1,4 +1,4 @@
-from .models import Human, Task1, status
+from .models import Human, Task1, status, branch
 from django.forms import ModelForm, TextInput, Textarea
 
 class Task1Form(ModelForm):
@@ -32,23 +32,29 @@ class statusform(ModelForm):
 class HumanForm(ModelForm):
     class Meta:
         model = Human
-        fields = ["Surname", "Forename", "ages", "evulation_work"]
+        fields = ["first_name", "second_name", "id_branch"]
         widgets = {
-            "Surname": TextInput(attrs={
+            "first_name": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите имя'
             }),
-            "Forename": TextInput(attrs={
+            "second_name": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите фамилию'
             }),
-            "ages": TextInput(attrs={
+            "id_branch": Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Возраст'
-            }),
-            "evulation_work": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Оценка работы'
+                'placeholder': 'Отдел разработки'
             }),
         }
 
+class branchform(ModelForm):
+    class Meta:
+        model = branch
+        fields = ["name"]
+        widgets = {
+            "name": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название'
+            }),
+        }

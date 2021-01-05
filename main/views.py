@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Task1, Human, status
+from .models import Task1, Human, status, branch
 from .forms import Task1Form, HumanForm
 import datetime
 
@@ -10,12 +10,27 @@ def about(request):
     return render(request, 'main/about.html')
 
 def tasks(request):
-    tasks = Task1.objects.all()
     humans = Human.objects.all()
-    return render(request, 'main/tasks.html', {'title': 'Главная', 'tasks': tasks, 'humans': humans})
+    humas_auth_bool = False
+    for human in humans:
+        if (str(human.id_registarion) == str(request.user.id)):
+            humas_auth_bool = True
+            break
+    if humas_auth_bool == False:
+        return redirect('createhuman')
+    tasks = Task1.objects.all()
+    return render(request, 'main/tasks.html', {'title': 'Главная', 'tasks': tasks})
 
 def createtask(request):
     Status = status.objects.all()
+    humans = Human.objects.all()
+    humas_auth_bool = False
+    for human in humans:
+        if (str(human.id_registarion) == str(request.user.id)):
+            humas_auth_bool = True
+            break
+    if humas_auth_bool == False:
+        return redirect('createhuman')
     if not(str(request.user) == 'AnonymousUser'):
         error = ''
         if request.method == 'POST':
@@ -36,7 +51,7 @@ def createtask(request):
         context = {
             'form': form,
             'error': error,
-            'Status': Status
+            'Status': Status,
         }
         return render(request, 'main/createtask.html', context)
     else:
@@ -44,6 +59,15 @@ def createtask(request):
 
 def id_performing_personTodo(request, todo_id):
     if not (str(request.user) == 'AnonymousUser'):
+        humans = Human.objects.all()
+        humas_auth_bool = False
+        for human in humans:
+            if (str(human.id_registarion) == str(request.user.id)):
+                humas_auth_bool = True
+                break
+        if humas_auth_bool == False:
+            return redirect('createhuman')
+
         todo = Task1.objects.get(pk=todo_id)
         user_name = request.user
         if (todo.id_status == "Свободно"):
@@ -60,18 +84,22 @@ def id_performing_personTodo(request, todo_id):
 
 def createhuman(request):
     error = ''
-    if request.method == 'POST':
-        form = HumanForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            error = 'Форма неверная'
+    Branch = branch.objects.all()
+    if not (str(request.user) == 'AnonymousUser'):
+        if request.method == 'POST':
+            form = HumanForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.id_registarion = request.user.id
+                post.save()
+                return redirect('tasks')
+            else:
+                error = 'Форма неверная'
 
-    form = HumanForm()
-    form.ages = '!!'
-    context = {
-        'form': form,
-        'error': error
-    }
-    return render(request, 'main/createhuman.html', context)
+        form = HumanForm()
+        context = {
+            'form': form,
+            'error': error,
+            'Branch': Branch
+        }
+        return render(request, 'main/createhuman.html', context)
