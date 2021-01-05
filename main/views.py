@@ -26,8 +26,9 @@ def createtask(request):
                 date_now = str(datetime.datetime.now())
                 post.date = date_now[0:10]
                 post.id_performing_person = "Свободна для выполнения"
+                post.id_status = "Свободно"
                 post.save()
-                return redirect('home')
+                return redirect('tasks')
             else:
                 error = 'Форма неверная'
 
@@ -45,6 +46,11 @@ def id_performing_personTodo(request, todo_id):
     if not (str(request.user) == 'AnonymousUser'):
         todo = Task1.objects.get(pk=todo_id)
         user_name = request.user
+        if (todo.id_status == "Свободно"):
+            todo.id_status = "Выполняется"
+        else:
+            if (todo.id_status == "Выполняется"):
+                todo.id_status = "Готово"
         todo.id_performing_person = str(user_name)
         todo.save()
     else:

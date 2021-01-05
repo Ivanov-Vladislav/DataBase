@@ -13,12 +13,6 @@
       {{ form.description }}<br>
       {{ form.date }}<br>
 
-      <select name="id_status" id="id_status">
-        {% for el in Status %}
-          <option value="{{ el.name }}">{{ el.name }}</option>
-         {% endfor %}
-      </select>
-
       <button type="submit" class="btn btn-success">Добавить</button>
       <button type="reset" class="btn btn-success">Очистить</button>
       <span>{{ error }}</span>
