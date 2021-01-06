@@ -43,12 +43,16 @@
             </div>
             <div class="d-flex">
               {% if el.id_performing_person == "-" %}
-              <a class="btn btn-sm btn-success" href="{% url 'id_performing_person' el.id %}">Принять</a>
+              <a class="btn btn-sm btn-success" href="{% url 'id_up_status' el.id %}">Принять</a>
               {% elif el.id_status == "Готово" %}
-              <a class="btn btn-sm btn-danger" href="{% url 'id_performing_person' el.id %}">Отменить</a>
+                {% if user_info == el.id_performing_person %}
+                  <a class="btn btn-sm btn-danger" href="{% url 'id_down_status' el.id %}">Отменить</a>
+                {% endif %}
               {% else %}
-              <a class="btn btn-sm btn-success" href="{% url 'id_performing_person' el.id %}">Готово</a>
-              <a class="btn btn-sm btn-danger ml-2" href="{% url 'id_performing_person' el.id %}">Отменить</a>
+                {% if user_info == el.id_performing_person %}
+                  <a class="btn btn-sm btn-success" href="{% url 'id_up_status' el.id %}">Готово</a>
+                  <a class="btn btn-sm btn-danger ml-2" href="{% url 'id_down_status' el.id %}">Отменить</a>
+                {% endif %}
               {% endif %}
             </div>
           </div>

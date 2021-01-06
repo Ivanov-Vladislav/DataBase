@@ -19,7 +19,8 @@ def tasks(request):
     if humas_auth_bool == False:
         return redirect('createhuman')
     tasks = Task1.objects.all()
-    return render(request, 'main/tasks.html', {'title': 'Задачи', 'tasks': tasks})
+    user_info =  str(request.user)
+    return render(request, 'main/tasks.html', {'title': 'Задачи', 'tasks': tasks, 'user_info':user_info})
 
 def createtask(request):
     Status = status.objects.all()
@@ -57,9 +58,11 @@ def createtask(request):
     else:
         return redirect('accounts/login/')
 
-def id_performing_personTodo(request, todo_id, cancel = False):
+def id_up_status(request, todo_id, cancel = False):
     if not (str(request.user) == 'AnonymousUser'):
         humans = Human.objects.all()
+        Status = status.objects.all()
+
         humas_auth_bool = False
         for human in humans:
             if (str(human.id_registarion) == str(request.user.id)):
@@ -69,14 +72,48 @@ def id_performing_personTodo(request, todo_id, cancel = False):
             return redirect('createhuman')
 
         todo = Task1.objects.get(pk=todo_id)
-        user_name = request.user
-        if (todo.id_status == "Свободно"):
-            todo.id_status = "Выполняется"
-        else:
-            if (todo.id_status == "Выполняется"):
-                todo.id_status = "Готово"
-        todo.id_performing_person = str(user_name)
-        todo.save()
+        if (str(todo.id_performing_person) == str(request.user)) or (str(todo.id_status) == str(Status[0])):
+            user_name = request.user
+            el_index = 0
+            for el in Status:
+                if str(todo.id_status) == str(el):
+                    break
+                el_index += 1
+            todo.id_status = str(Status[el_index+1])
+            todo.id_performing_person = str(user_name)
+            todo.save()
+    else:
+        return redirect('http://127.0.0.1:8000/accounts/login/')
+
+    return redirect('tasks')
+
+def id_down_status(request, todo_id, cancel = False):
+    if not (str(request.user) == 'AnonymousUser'):
+        humans = Human.objects.all()
+        Status = status.objects.all()
+
+        humas_auth_bool = False
+        for human in humans:
+            if (str(human.id_registarion) == str(request.user.id)):
+                humas_auth_bool = True
+                break
+        if humas_auth_bool == False:
+            return redirect('createhuman')
+
+        todo = Task1.objects.get(pk=todo_id)
+        if str(todo.id_performing_person) == str(request.user):
+            user_name = request.user
+            el_index = 0
+            for el in Status:
+                if str(todo.id_status) == str(el):
+                    break
+                el_index += 1
+            todo.id_status = str(Status[el_index-1])
+            if str(todo.id_status) == str(Status[0]):
+                todo.id_performing_person = '-'
+            else:
+                todo.id_performing_person = str(user_name)
+            todo.save()
     else:
         return redirect('http://127.0.0.1:8000/accounts/login/')
 
