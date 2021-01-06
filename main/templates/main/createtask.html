@@ -1,21 +1,21 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-  Создать задачу
+Создать задачу
 {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h1>Создать задачу</h1>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.title }}<br>
-      {{ form.description }}<br>
-      {{ form.date }}<br>
+<div class="container">
+  <h2 class="text-white">Создать задачу</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.title }}<br>
+    {{ form.description }}<br>
+    {{ form.date }}<br>
 
-      <button type="submit" class="btn btn-success">Добавить</button>
-      <button type="reset" class="btn btn-success">Очистить</button>
-      <span>{{ error }}</span>
-    </form>
-  </div>
+    <button type="submit" class="btn btn-success">Добавить</button>
+    <button type="reset" class="btn btn-danger">Очистить</button>
+    <span>{{ error }}</span>
+  </form>
+</div>
 {% endblock %}

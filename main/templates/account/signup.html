@@ -6,16 +6,16 @@
 
 {% block content %}
 <div class="main-section form-block">
-    <h3>{% trans "Sign Up" %}</h3>
+    <h2 class="text-warning">{% trans "Sign Up" %}</h2>
     <form class="form" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
         {{ form.as_p }}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
-        <button class="btn btn-outline-light mt-2" type="submit">{% trans "Sign Up" %} &raquo;</button>
+        <button class="btn btn-warning mt-2" type="submit">{% trans "Sign Up" %} &raquo;</button>
     </form>
-    <p class="mt-2">{% blocktrans %}Уже зарегистрированы? <a class="text-primary text-decoration-none" href="{{ login_url }}">Войдите.</a>{% endblocktrans %}
+    <p class="mt-2">{% blocktrans %}Уже зарегистрированы? <a class="text-warning text-decoration-none" href="{{ login_url }}">Войдите.</a>{% endblocktrans %}
     </p>
 </div>
 {% endblock %}

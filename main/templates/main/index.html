@@ -1,17 +1,17 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-  Главная
+Главная
 {% endblock %}
 
 {% block content %}
 <div class="main-section text-center">
-  <h1 class="mb-3">Project To Do</h1>
+  <h1 class="mb-3 text-warning">Project To Do</h1>
   <span>To Do поможет вам сосредоточиться</span>
   <br>
   <span>на любом занятии — от работы до игры.</span>
   <div class="mt-3">
-    <a href="{% url 'tasks' %}" role="button" class="btn btn-outline-light">Начать работу</a>
+    <a href="{% url 'tasks' %}" role="button" class="btn btn-warning">Начать работу</a>
   </div>
 </div>
 {% endblock %}

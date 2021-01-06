@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="main-section form-block">
-    <h3>{% trans "Sign In" %}</h3>
+    <h2 class="text-warning">{% trans "Sign In" %}</h2>
 
     {#{% get_providers as socialaccount_providers %}#}
 
@@ -38,8 +38,8 @@
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
 
-        <button class="btn btn-outline-light" type="submit">{% trans "Sign In" %}</button>
-        <a class="button text-light text-decoration-none ml-4" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <button class="btn btn-warning" type="submit">{% trans "Sign In" %}</button>
+        <a class="button text-decoration-none ml-4" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
     </form>
 </div>
 {% endblock %}

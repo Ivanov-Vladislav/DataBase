@@ -7,28 +7,28 @@
 {% block content %}
 <div class="container">
   {% if tasks %}
-  <h2 class="text-light text-center mt-5">{{ title }}</h2>
+  <h2 class="text-white text-center mt-5">{{ title }}</h2>
   <div class="accordion mt-4" id="accordionTable">
     {% for el in tasks %}
-    <div class="card text-white bg-dark">
-      <a class="text-light text-decoration-none" type="button" data-toggle="collapse" data-target="#id{{ el.id }}"
+    <div class="card text-white">
+      <a class="text-white text-decoration-none" type="button" data-toggle="collapse" data-target="#id{{ el.id }}"
          aria-expanded="true" aria-controls="collapseOne" href="#">
         <div class="card-header d-flex justify-content-between">
           <h5>{{ el.title }}</h5>
           {% if el.id_status == "Готово" %}
-          <span class="mt-1 text-success">{{ el.id_status }}</span>
+          <span class="card-status text-success">{{ el.id_status }}</span>
           {% elif el.id_status == "Выполняется" %}
-          <span class="mt-1 text-warning">{{ el.id_status }}</span>
+          <span class="card-status text-warning">{{ el.id_status }}</span>
           {% else %}
-          <span class="mt-1 text-info">{{ el.id_status }}</span>
+          <span class="card-status text-info">{{ el.id_status }}</span>
           {% endif %}
         </div>
       </a>
       <div id="id{{ el.id }}" class="collapse" data-parent="#accordionTable">
-        <div class="card-body bg-secondary">
-          <div class="border-bottom border-dark">
+        <div class="card-body">
+          <div class="border-bottom border-warning">
             <div class="d-flex">
-              <p class="text-uppercase">Описание:</p>
+              <p class="text-uppercase text-warning">Описание:</p>
               <p class="ml-3">{{ el.description }}</p>
             </div>
             <div class="d-flex justify-content-end subtitle-task mb-2">
@@ -38,7 +38,7 @@
           </div>
           <div class="d-flex mt-2 justify-content-between">
             <div class="d-flex">
-              <span>Исполнитель:</span>
+              <span class="text-warning">Исполнитель:</span>
               <span class="ml-2">{{ el.id_performing_person }}</span>
             </div>
             <div class="d-flex">
