@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container">
   {% if tasks %}
-  <h2 class="text-white text-center mt-5">{{ title }}</h2>
+  <h2 class="text-white text-center mt-4">{{ title }}</h2>
   <div class="accordion mt-4" id="accordionTable">
     {% for el in tasks %}
     <div class="card text-white">
@@ -27,9 +27,14 @@
       <div id="id{{ el.id }}" class="collapse" data-parent="#accordionTable">
         <div class="card-body">
           <div class="border-bottom border-warning">
-            <div class="d-flex">
-              <p class="text-uppercase text-warning">Описание:</p>
-              <p class="ml-3">{{ el.description }}</p>
+            <div class="d-flex justify-content-between">
+              <div class="d-flex">
+                <p class="text-uppercase text-warning">Описание:</p>
+                <p class="ml-3">{{ el.description }}</p>
+              </div>
+              {% if  el.id_person == user_info or user_info == "user"%}
+                <a class="text-warning text-decoration-none" href="edit/{{el.id}}">Изменить</a>
+              {% endif %}
             </div>
             <div class="d-flex justify-content-end subtitle-task mb-2">
               <span>{{ el.id_person }}</span>
@@ -58,9 +63,6 @@
               {% endif %}
               {% if  el.id_person == user_info or user_info == "user"%}
                 <a class="btn btn-sm btn-danger ml-2" href="{% url 'delete_task' el.id %}">Удалить</a>
-              {% endif %}
-              {% if  el.id_person == user_info or user_info == "user"%}
-             <a href="edit/{{el.id}}">Изменить</a>
               {% endif %}
             </div>
           </div>

@@ -63,6 +63,7 @@ a {
     display: inline-block;
 }
 .form p input:not(#id_remember) {
+    color: #FFD50D;
     width: 100%;
     height: 35px;
     background: transparent;
@@ -88,4 +89,29 @@ a {
 }
 .card h5 {
     color: #FFD50D;
+}
+.avatar-profile {
+    border-radius: 50%;
+    width: 160px;
+}
+.title-profile {
+    font-size: 20px;
+}
+.title-profile .default-title {
+    width: 150px;
+}
+.title-profile .dinamik-title {
+    border-bottom: 1px solid #FFD50D;
+}
+.form-task input {
+    color: #FFD50D;
+    width: 100%;
+    height: 35px;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #FFD50D;
+}
+.form-task input:focus {
+    outline: none;
 }

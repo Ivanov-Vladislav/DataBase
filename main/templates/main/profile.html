@@ -6,15 +6,27 @@
 
 {% block content %}
 <div class="container">
-    <h2 class="text-white text-center mt-5">{{ title }}</h2>
-    <div class="accordion mt-4" id="accordionTable">
-        <div class="card text-white">
-            <span class="card-status text-success">{{ self_human.first_name }} {{ self_human.second_name }}</span>
-            <span class="card-status text-success">Отдел работы: {{ self_human.id_branch }}</span>
-            <span class="card-status text-success">Email: {{ request.user.email }}</span>
-            <span class="card-status text-success">Логин: {{ request.user.username }}</span>
-            <img width = "400" height = "320" src="{{ self_human.avatar.url }}">
+  <h2 class="text-white text-center mt-4 mb-4">{{ title }}</h2>
+  <div class="card p-3">
+    <div class="d-flex border border-warning p-5">
+      <div>
+        <img class="avatar-profile" src="{{ self_human.avatar.url }}" alt="avatar">
+      </div>
+      <div class="text-white ml-4">
+        <div class="mb-2 d-flex title-profile">
+            <div class="default-title">Логин:</div><div class="dinamik-title">{{ request.user.username }}</div>
         </div>
+        <div class="mb-2 d-flex title-profile">
+            <div class="default-title">Данные:</div><div class="dinamik-title">{{ self_human.first_name }} <span class="ml-2">{{ self_human.second_name }}</span></div>
+        </div>
+        <div class="mb-2 d-flex title-profile">
+            <div class="default-title">Должность:</div><div class="dinamik-title">{{ self_human.id_branch }}</div>
+        </div>
+        <div class="mb-2 d-flex title-profile">
+            <div class="default-title">Email:</div><div class="dinamik-title">{{ request.user.email }}</div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}

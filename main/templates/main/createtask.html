@@ -6,16 +6,20 @@
 
 {% block content %}
 <div class="container">
-  <h2 class="text-white">Создать задачу</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.title }}<br>
-    {{ form.description }}<br>
-    {{ form.date }}<br>
-
-    <button type="submit" class="btn btn-success">Добавить</button>
-    <button type="reset" class="btn btn-danger">Очистить</button>
-    <span>{{ error }}</span>
-  </form>
+  <h2 class="text-white text-center mt-4 mb-4">Создать задачу</h2>
+  <div class="card col-6 p-3 mx-auto">
+    <div class="border border-warning p-5">
+      <form class="form-task mt-4" method="post">
+        {% csrf_token %}
+        {{ form.title }}<br>
+        {{ form.description }}<br>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-success">Добавить</button>
+          <button type="reset" class="btn btn-danger">Очистить</button>
+        </div>
+        <span>{{ error }}</span>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}
