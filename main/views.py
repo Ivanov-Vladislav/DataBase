@@ -146,11 +146,13 @@ def createhuman(request):
 
 def profile(request):
     user_info = request.user
+    tasks = Task1.objects.all()
     humans = Human.objects.all()
     for human in humans:
         if str(human.id_registarion) == str(user_info.id):
             self_human = human
-    return render(request, 'main/profile.html', {'title': 'Профиль', 'self_human': self_human})
+    user_info = str(request.user)
+    return render(request, 'main/profile.html', {'title': 'Профиль', 'tasks':tasks, 'self_human': self_human, 'user_info':user_info})
 
 def delete_task(request, id):
     task = Task1.objects.get(pk=id)
