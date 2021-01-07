@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Task1, Human, status, branch
 from .forms import Task1Form, HumanForm
 import datetime
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 
 def index(request):
     return render(request, 'main/index.html')
@@ -89,7 +90,7 @@ def id_up_status(request, todo_id, cancel = False):
 
     return redirect('tasks')
 
-def id_down_status(request, todo_id, cancel = False):
+def id_down_status(request, todo_id):
     if not (str(request.user) == 'AnonymousUser'):
         humans = Human.objects.all()
         Status = status.objects.all()
@@ -150,3 +151,22 @@ def profile(request):
         if str(human.id_registarion) == str(user_info.id):
             self_human = human
     return render(request, 'main/profile.html', {'title': 'Профиль', 'self_human': self_human})
+
+def delete_task(request, id):
+    task = Task1.objects.get(pk=id)
+    task.delete()
+    return redirect('tasks')
+
+
+def edit(request, id):
+    try:
+        todo = Task1.objects.get(id=id)
+        if request.method == "POST":
+            todo.title = request.POST.get("title")
+            todo.description = request.POST.get("description")
+            todo.save()
+            return HttpResponseRedirect("/tasks")
+        else:
+            return render(request, "main/edit.html", {'title': 'Профиль', "todo": todo})
+    except todo.DoesNotExist:
+        return HttpResponseNotFound("<h2>Todo not found</h2>")

@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Введите название</label><br>
+            <input type="text" name="title" value="{{todo.title}}" />
+        </p>
+        <p>
+            <label>Введите описание</label><br>
+            <input type="text" name="description" value="{{todo.description}}" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+</div>
+{% endblock %}

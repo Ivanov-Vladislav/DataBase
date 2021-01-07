@@ -1,7 +1,7 @@
 from django.db import models
 
 class Task1(models.Model):
-    title = models.CharField('Название', max_length=100)
+    title = models.CharField('Название', max_length=25)
     description = models.TextField('Описание')
     date = models.CharField('Дата', max_length=10)
     id_person = models.CharField('Создатель', max_length=10)

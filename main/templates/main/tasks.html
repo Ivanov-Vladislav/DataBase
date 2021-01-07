@@ -56,6 +56,12 @@
                   {% endif %}
                 {% endif %}
               {% endif %}
+              {% if  el.id_person == user_info or user_info == "user"%}
+                <a class="btn btn-sm btn-danger ml-2" href="{% url 'delete_task' el.id %}">Удалить</a>
+              {% endif %}
+              {% if  el.id_person == user_info or user_info == "user"%}
+             <a href="edit/{{el.id}}">Изменить</a>
+              {% endif %}
             </div>
           </div>
         </div>
