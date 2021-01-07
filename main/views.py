@@ -12,26 +12,28 @@ def about(request):
 def tasks(request):
     humans = Human.objects.all()
     humas_auth_bool = False
-    for human in humans:
-        if (str(human.id_registarion) == str(request.user.id)):
-            humas_auth_bool = True
-            break
-    if humas_auth_bool == False:
-        return redirect('createhuman')
+    if not(str(request.user) == "AnonymousUser"):
+        for human in humans:
+            if (str(human.id_registarion) == str(request.user.id)):
+                humas_auth_bool = True
+                break
+        if humas_auth_bool == False:
+            return redirect('createhuman')
     tasks = Task1.objects.all()
-    user_info =  str(request.user)
+    user_info = str(request.user)
     return render(request, 'main/tasks.html', {'title': 'Задачи', 'tasks': tasks, 'user_info':user_info})
 
 def createtask(request):
     Status = status.objects.all()
     humans = Human.objects.all()
     humas_auth_bool = False
-    for human in humans:
-        if (str(human.id_registarion) == str(request.user.id)):
-            humas_auth_bool = True
-            break
-    if humas_auth_bool == False:
-        return redirect('createhuman')
+    if not (str(request.user) == "AnonymousUser"):
+        for human in humans:
+            if (str(human.id_registarion) == str(request.user.id)):
+                humas_auth_bool = True
+                break
+        if humas_auth_bool == False:
+            return redirect('createhuman')
     if not(str(request.user) == 'AnonymousUser'):
         error = ''
         if request.method == 'POST':

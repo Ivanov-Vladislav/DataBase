@@ -20,7 +20,7 @@ class Human(models.Model):
     second_name = models.CharField('Фамилия', max_length=15)
     #avatar = models.CharField('avatar', max_length=2)
     id_registarion = models.CharField('id при регистрации', max_length=5)
-    id_branch = models.CharField('отдел разработки', max_length=10)
+    id_branch = models.CharField('отдел разработки', max_length=13)
 
     def __str__(self):
         return self.first_name
