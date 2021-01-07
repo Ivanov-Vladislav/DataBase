@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-white text-center mt-5">{{ title }}</h2>
+    <div class="accordion mt-4" id="accordionTable">
+        <div class="card text-white">
+            <span class="card-status text-success">{{ self_human.first_name }} {{ self_human.second_name }}</span>
+            <span class="card-status text-success">Отдел работы: {{ self_human.id_branch }}</span>
+            <span class="card-status text-success">Email: {{ request.user.email }}</span>
+            <span class="card-status text-success">Логин: {{ request.user.username }}</span>
+            <img width = "400" height = "320" src="{{ self_human.avatar.url }}">
+        </div>
+    </div>
+</div>
+{% endblock %}

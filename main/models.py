@@ -18,7 +18,7 @@ class Task1(models.Model):
 class Human(models.Model):
     first_name = models.CharField('Имя', max_length=10)
     second_name = models.CharField('Фамилия', max_length=15)
-    #avatar = models.CharField('avatar', max_length=2)
+    avatar = models.ImageField(null=True, blank=True, upload_to="images/")
     id_registarion = models.CharField('id при регистрации', max_length=5)
     id_branch = models.CharField('отдел разработки', max_length=13)
 
@@ -48,4 +48,3 @@ class branch(models.Model):
     class Meta:
         verbose_name = 'Отдел'
         verbose_name_plural = 'Отделы'
-

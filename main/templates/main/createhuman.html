@@ -7,17 +7,19 @@
 {% block content %}
   <div class="container">
     <h1>Личные данные</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.first_name }}<br>
       {{ form.second_name }}<br>
 
       <select name="id_branch" id="id_branch">
         {% for el in Branch %}
-          <option value="{{ el.name }}">{{ el.name }}</option>
+          <option value="{{ el.name }}">{{ el.name }}</option><br>
          {% endfor %}
       </select>
 
+
+        {{ form.avatar }}
       <button type="submit" class="btn btn-success">Добавить</button>
       <span>{{ error }}</span>
     </form>

@@ -39,6 +39,7 @@
     {% if user.is_authenticated %}
     <div>
       <span class="mr-3 text-white">{{user.username }} </span>
+      <a type="button" class="btn btn-warning" href="{% url 'profile' %}">Личный кабинет</a>
       <a type="button" class="btn btn-warning" href="{% url 'account_logout' %}">Выход</a>
     </div>
     {% else %}

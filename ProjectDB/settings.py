@@ -146,3 +146,9 @@ STATICFILES_DIRS = [
 ]
 
 SITE_ID = 1
+
+# Основной url для управления медиафайлами
+MEDIA_URL = '/media/'
+
+# Путь хранения картинок
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

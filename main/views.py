@@ -126,7 +126,7 @@ def createhuman(request):
     Branch = branch.objects.all()
     if not (str(request.user) == 'AnonymousUser'):
         if request.method == 'POST':
-            form = HumanForm(request.POST)
+            form = HumanForm(request.POST, request.FILES)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.id_registarion = request.user.id
@@ -142,3 +142,11 @@ def createhuman(request):
             'Branch': Branch
         }
         return render(request, 'main/createhuman.html', context)
+
+def profile(request):
+    user_info = request.user
+    humans = Human.objects.all()
+    for human in humans:
+        if str(human.id_registarion) == str(user_info.id):
+            self_human = human
+    return render(request, 'main/profile.html', {'title': 'Профиль', 'self_human': self_human})

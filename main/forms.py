@@ -32,21 +32,7 @@ class statusform(ModelForm):
 class HumanForm(ModelForm):
     class Meta:
         model = Human
-        fields = ["first_name", "second_name", "id_branch"]
-        widgets = {
-            "first_name": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите имя'
-            }),
-            "second_name": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите фамилию'
-            }),
-            "id_branch": Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Отдел разработки'
-            }),
-        }
+        fields = ["first_name", "second_name", "id_branch", "avatar"]
 
 class branchform(ModelForm):
     class Meta:
