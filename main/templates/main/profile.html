@@ -14,41 +14,87 @@
       </div>
       <div class="text-white ml-4">
         <div class="mb-2 d-flex title-profile">
-  <!--          <div class="default-title">Логин:</div><div class="dinamik-title">{{ request.user.username }}</div>
-        </div>
-        <div class="mb-2 d-flex title-profile">-->
-            <div class="default-title"><!--Данные:--></div><div class="dinamik-title">{{ self_human.first_name }} <span class="ml-2">{{ self_human.second_name }}</span></div>
+          <div class="dinamik-title">{{ request.user.username }}</div>
         </div>
         <div class="mb-2 d-flex title-profile">
-            <div class="default-title"><!--Должность::-->Отдел работы:</div><div class="dinamik-title">{{ self_human.id_branch }}</div>
+          <div class="dinamik-title">{{ self_human.first_name }} <span class="ml-2">{{ self_human.second_name }}</span>
+          </div>
         </div>
         <div class="mb-2 d-flex title-profile">
-            <div class="default-title">Email:</div><div class="dinamik-title">{{ request.user.email }}</div>
+          <div class="dinamik-title">{{ self_human.id_branch }}</div>
+        </div>
+        <div class="mb-2 d-flex title-profile">
+          <div class="dinamik-title">{{ request.user.email }}</div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div>
-  <h4 class="text-white text-center mt-4 mb-4">Взятые задачи</h4>
-</div>
-<div class="accordion mt-4" id="accordionTable">
+  <h4 class="text-white text-center mt-4 mb-4">Задачи пользователя</h4>
+  <div class="accordion mt-4" id="accordionTable">
     {% for el in tasks %}
-      {% if user_info == el.id_performing_person %}
-        <div class="card text-white">
-          <a class="text-white text-decoration-none" type="button" data-toggle="collapse" data-target="#id{{ el.id }}"
-             aria-expanded="true" aria-controls="collapseOne" href="#">
-            <div class="card-header d-flex justify-content-between">
-              <h5>{{ el.title }}</h5>
-              <span class="card-status text-warning">{{ el.id_status }}</span>
-              <p class="text-uppercase text-warning">Описание:</p>
-              <p class="ml-3">{{ el.description }}</p>
+    {% if user_info == el.id_performing_person %}
+    <div class="card text-white">
+      <a class="text-white text-decoration-none" type="button" data-toggle="collapse" data-target="#id{{ el.id }}"
+         aria-expanded="true" aria-controls="collapseOne" href="#">
+        <div class="card-header d-flex justify-content-between">
+          <h5>{{ el.title }}</h5>
+          {% if el.id_status == "Готово" %}
+          <span class="card-status text-success">{{ el.id_status }}</span>
+          {% elif el.id_status == "Выполняется" %}
+          <span class="card-status text-warning">{{ el.id_status }}</span>
+          {% else %}
+          <span class="card-status text-info">{{ el.id_status }}</span>
+          {% endif %}
+        </div>
+      </a>
+      <div id="id{{ el.id }}" class="collapse" data-parent="#accordionTable">
+        <div class="card-body">
+          <div class="border-bottom border-warning">
+            <div class="d-flex justify-content-between">
+              <div class="d-flex">
+                <p class="text-uppercase text-warning">Описание:</p>
+                <p class="ml-3">{{ el.description }}</p>
+              </div>
+              {% if el.id_person == user_info or user_info == "user"%}
+              <a class="text-warning text-decoration-none" href="edit/{{el.id}}">Изменить</a>
+              {% endif %}
+            </div>
+            <div class="d-flex justify-content-end subtitle-task mb-2">
               <span>{{ el.id_person }}</span>
               <span class="ml-2">{{ el.date }}</span>
             </div>
-          </a>
+          </div>
+          <div class="d-flex mt-2 justify-content-between">
+            <div class="d-flex">
+              <span class="text-warning">Исполнитель:</span>
+              <span class="ml-2">{{ el.id_performing_person }}</span>
+            </div>
+            <div class="d-flex">
+              {% if user_info != "AnonymousUser" %}
+              {% if el.id_performing_person == "-" %}
+              <a class="btn btn-sm btn-success" href="{% url 'id_up_status' el.id %}">Принять</a>
+              {% elif el.id_status == "Готово" %}
+              {% if user_info == el.id_performing_person %}
+              <a class="btn btn-sm btn-danger" href="{% url 'id_down_status' el.id %}">Отменить</a>
+              {% endif %}
+              {% else %}
+              {% if user_info == el.id_performing_person %}
+              <a class="btn btn-sm btn-success" href="{% url 'id_up_status' el.id %}">Готово</a>
+              <a class="btn btn-sm btn-danger ml-2" href="{% url 'id_down_status' el.id %}">Отменить</a>
+              {% endif %}
+              {% endif %}
+              {% endif %}
+              {% if el.id_person == user_info or user_info == "user"%}
+              <a class="btn btn-sm btn-danger ml-2" href="{% url 'delete_task' el.id %}">Удалить</a>
+              {% endif %}
+            </div>
+          </div>
         </div>
-      {% endif %}
-  {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
 </div>
+<div class="p-5"></div>
 {% endblock %}
