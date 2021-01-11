@@ -21,17 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="610217fe-bb9f-4109-b016-4b2ec708dbaa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/images/аватар_MfPMPu0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/images/аватар_NTqMIaM.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/images/аватар_UVy6B3J.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/images/аватар_mGJbGVV.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/images/аватар_v9TlSEN.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_image.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
