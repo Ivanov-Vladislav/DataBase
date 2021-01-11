@@ -14,7 +14,8 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('delete_task/<id>', views.delete_task, name='delete_task'),
     path('edit/<int:id>/', views.edit),
-    path('edit_profile/', views.createhuman),
+    path('edit_avatar/', views.edit_avatar),
+    path('edit_data/', views.edit_data),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

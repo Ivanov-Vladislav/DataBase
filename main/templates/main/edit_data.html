@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Введите имя</label><br>
+            <input type="text" name="first_name" value="{{human.first_name}}" />
+        </p>
+
+        <p>
+            <label>Введите фамилию</label><br>
+            <input type="text" name="second_name" value="{{human.second_name}}" />
+        </p>
+
+        <p>
+            <label>Отдел работы</label><br>
+                <select name="id_branch" id="id_branch">
+                {% for el in Branch %}
+                  <option value="{{ el.name }}">{{ el.name }}</option><br>
+                 {% endfor %}
+              </select>
+        </p>
+
+        <input type="submit" value="Сохранить" >
+    </form>
+</div>
+{% endblock %}

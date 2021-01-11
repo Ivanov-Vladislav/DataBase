@@ -50,3 +50,11 @@ class Human(models.Model):
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
 
+class Avatar(models.Model):
+    title = models.CharField('Имя', max_length=10)
+    avatar = models.ImageField(null=True, blank=True, upload_to="images/")
+
+    def __str__(self):
+        return self.title
+
+

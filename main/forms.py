@@ -1,4 +1,4 @@
-from .models import Human, Task1, status, branch
+from .models import Human, Task1, status, branch, Avatar
 from django.forms import ModelForm, TextInput
 
 class Task1Form(ModelForm):
@@ -44,3 +44,8 @@ class branchform(ModelForm):
                 'placeholder': 'Введите название'
             }),
         }
+
+class AvatarForm(ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ["avatar"]

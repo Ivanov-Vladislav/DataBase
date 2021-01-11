@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Task1, Human, status, branch
-from .forms import Task1Form, HumanForm
+from .models import Task1, Human, status, branch, Avatar
+from .forms import Task1Form, HumanForm, AvatarForm
 import datetime
 import os
 from django.http import HttpResponseRedirect, HttpResponseNotFound
@@ -166,6 +166,7 @@ def profile(request):
         return redirect('createhuman')
     except UnboundLocalError:
         return redirect('createhuman')
+
 def delete_task(request, id):
     task = Task1.objects.get(pk=id)
     task.delete()
@@ -184,3 +185,41 @@ def edit(request, id):
             return render(request, "main/edit.html", {'title': 'Профиль', "todo": todo})
     except todo.DoesNotExist:
         return HttpResponseNotFound("<h2>Todo not found</h2>")
+
+
+def edit_avatar(request):
+    error = ''
+    human_temp = Human.objects.get(id_registarion=request.user.id)
+    if request.method == 'POST':
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            human = form.save(commit=False)
+            human_temp.avatar = human.avatar
+            human_temp.save()
+            return redirect('profile')
+        else:
+            error = 'Форма неверная'
+
+    form = HumanForm()
+    context = {
+        'form': form,
+        'error': error,
+    }
+    return render(request, 'main/edit_avatar.html', context)
+
+def edit_data(request):
+    try:
+        Branch = branch.objects.all()
+        human = Human.objects.get(id_registarion=request.user.id)
+        if request.method == "POST":
+            human.first_name = request.POST.get("first_name")
+            human.second_name = request.POST.get("second_name")
+            self_branch = request.POST.get("id_branch")
+            human.id_branch = branch.objects.get(name = self_branch)
+            print(human.id_branch)
+            human.save()
+            return HttpResponseRedirect("/profile")
+        else:
+            return render(request, "main/edit_data.html", {'title': 'Редактирование профиля', "human": human, 'Branch': Branch})
+    except human.DoesNotExist:
+        return HttpResponseNotFound("<h2>Human not found</h2>")
