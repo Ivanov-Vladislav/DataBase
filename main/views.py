@@ -13,6 +13,8 @@ def about(request):
 
 def tasks(request):
     humans = Human.objects.all()
+    Status_good = status.objects.get(id=3)
+    Status_norm = status.objects.get(id=2)
     humas_auth_bool = False
     if not(str(request.user) == "AnonymousUser"):
         for human in humans:
@@ -22,8 +24,9 @@ def tasks(request):
         if humas_auth_bool == False:
             return redirect('createhuman')
     tasks = Task1.objects.all()
+
     user_info = str(request.user)
-    return render(request, 'main/tasks.html', {'title': 'Задачи', 'tasks': tasks, 'user_info':user_info})
+    return render(request, 'main/tasks.html', {'title': 'Задачи', 'tasks': tasks, 'user_info':user_info, 'Status_good':Status_good, 'Status_norm':Status_norm})
 
 def createtask(request):
     Status = status.objects.all()
@@ -46,7 +49,7 @@ def createtask(request):
                 date_now = str(datetime.datetime.now())
                 post.date = date_now[0:10]
                 post.id_performing_person = "-"
-                post.id_status = "Свободно"
+                post.id_status = Status[0]
                 post.save()
                 return redirect('tasks')
             else:
@@ -83,13 +86,13 @@ def id_up_status(request, todo_id, cancel = False):
                 if str(todo.id_status) == str(el):
                     break
                 el_index += 1
-            todo.id_status = str(Status[el_index+1])
+            todo.id_status = Status[el_index+1]
             todo.id_performing_person = str(user_name)
             todo.save()
     else:
         return redirect('http://127.0.0.1:8000/accounts/login/')
 
-    return redirect('tasks')
+    return redirect('profile')
 
 def id_down_status(request, todo_id):
     if not (str(request.user) == 'AnonymousUser'):
@@ -112,7 +115,7 @@ def id_down_status(request, todo_id):
                 if str(todo.id_status) == str(el):
                     break
                 el_index += 1
-            todo.id_status = str(Status[el_index-1])
+            todo.id_status = Status[el_index-1]
             if str(todo.id_status) == str(Status[0]):
                 todo.id_performing_person = '-'
             else:
@@ -121,7 +124,7 @@ def id_down_status(request, todo_id):
     else:
         return redirect('http://127.0.0.1:8000/accounts/login/')
 
-    return redirect('tasks')
+    return redirect('profile')
 
 def createhuman(request):
     error = ''
@@ -132,6 +135,7 @@ def createhuman(request):
             form = HumanForm(request.POST, request.FILES)
             if form.is_valid():
                 post = form.save(commit=False)
+                post.id_branch = branch.objects.get(name = request.POST.get("id_branch"))
                 post.id_registarion = request.user.id
                 post.save()
                 return redirect('tasks')
@@ -149,13 +153,15 @@ def createhuman(request):
 def profile(request):
     try:
         user_info = request.user
+        Status_good = status.objects.get(id=3)
+        Status_norm = status.objects.get(id=2)
         tasks = Task1.objects.all()
         humans = Human.objects.all()
         for human in humans:
             if str(human.id_registarion) == str(user_info.id):
                 self_human = human
         user_info = str(request.user)
-        return render(request, 'main/profile.html', {'title': 'Профиль', 'tasks':tasks, 'self_human': self_human, 'user_info':user_info})
+        return render(request, 'main/profile.html', {'title': 'Профиль', 'tasks':tasks, 'self_human': self_human, 'user_info':user_info,  'Status_good':Status_good, 'Status_norm':Status_norm})
     except ValueError:
         return redirect('createhuman')
     except UnboundLocalError:

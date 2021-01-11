@@ -39,9 +39,9 @@
          aria-expanded="true" aria-controls="collapseOne" href="#">
         <div class="card-header d-flex justify-content-between">
           <h5>{{ el.title }}</h5>
-          {% if el.id_status == "Готово" %}
+          {% if el.id_status == Status_good %}
           <span class="card-status text-success">{{ el.id_status }}</span>
-          {% elif el.id_status == "Выполняется" %}
+          {% elif el.id_status == Status_norm %}
           <span class="card-status text-warning">{{ el.id_status }}</span>
           {% else %}
           <span class="card-status text-info">{{ el.id_status }}</span>
@@ -74,7 +74,7 @@
               {% if user_info != "AnonymousUser" %}
               {% if el.id_performing_person == "-" %}
               <a class="btn btn-sm btn-success" href="{% url 'id_up_status' el.id %}">Принять</a>
-              {% elif el.id_status == "Готово" %}
+              {% elif el.id_status ==  Status_good %}
               {% if user_info == el.id_performing_person %}
               <a class="btn btn-sm btn-danger" href="{% url 'id_down_status' el.id %}">Отменить</a>
               {% endif %}

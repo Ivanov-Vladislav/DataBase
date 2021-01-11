@@ -1,5 +1,5 @@
 from .models import Human, Task1, status, branch
-from django.forms import ModelForm, TextInput, Textarea
+from django.forms import ModelForm, TextInput
 
 class Task1Form(ModelForm):
     class Meta:
@@ -32,7 +32,7 @@ class statusform(ModelForm):
 class HumanForm(ModelForm):
     class Meta:
         model = Human
-        fields = ["first_name", "second_name", "id_branch", "avatar"]
+        fields = ["first_name", "second_name", "avatar"]
 
 class branchform(ModelForm):
     class Meta:
