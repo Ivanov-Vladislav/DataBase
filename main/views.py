@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Task1, Human, status, branch
 from .forms import Task1Form, HumanForm
 import datetime
+import os
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 
 def index(request):
@@ -125,6 +126,7 @@ def id_down_status(request, todo_id):
 def createhuman(request):
     error = ''
     Branch = branch.objects.all()
+    Human.objects.filter(id_registarion=request.user.id).delete()
     if not (str(request.user) == 'AnonymousUser'):
         if request.method == 'POST':
             form = HumanForm(request.POST, request.FILES)
@@ -145,15 +147,19 @@ def createhuman(request):
         return render(request, 'main/createhuman.html', context)
 
 def profile(request):
-    user_info = request.user
-    tasks = Task1.objects.all()
-    humans = Human.objects.all()
-    for human in humans:
-        if str(human.id_registarion) == str(user_info.id):
-            self_human = human
-    user_info = str(request.user)
-    return render(request, 'main/profile.html', {'title': 'Профиль', 'tasks':tasks, 'self_human': self_human, 'user_info':user_info})
-
+    try:
+        user_info = request.user
+        tasks = Task1.objects.all()
+        humans = Human.objects.all()
+        for human in humans:
+            if str(human.id_registarion) == str(user_info.id):
+                self_human = human
+        user_info = str(request.user)
+        return render(request, 'main/profile.html', {'title': 'Профиль', 'tasks':tasks, 'self_human': self_human, 'user_info':user_info})
+    except ValueError:
+        return redirect('createhuman')
+    except UnboundLocalError:
+        return redirect('createhuman')
 def delete_task(request, id):
     task = Task1.objects.get(pk=id)
     task.delete()
