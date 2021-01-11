@@ -6,29 +6,33 @@
 
 
 {% block content %}
-<div class="container">
-    <form method="POST">
-        {% csrf_token %}
-        <p>
-            <label>Введите имя</label><br>
-            <input type="text" name="first_name" value="{{human.first_name}}" />
-        </p>
+<div class="main-section">
+  <h2 class="text-white text-center my-4">Изменить данные</h2>
+  <div class="form-block">
+    <form method="POST" class="form">
+    {% csrf_token %}
+    <p class="mb-3">
+      <label>Введите имя</label>
+      <input type="text" name="first_name" value="{{human.first_name}}"/>
+    </p>
 
-        <p>
-            <label>Введите фамилию</label><br>
-            <input type="text" name="second_name" value="{{human.second_name}}" />
-        </p>
+    <p class="mb-3">
+      <label>Введите фамилию</label>
+      <input type="text" name="second_name" value="{{human.second_name}}"/>
+    </p>
 
-        <p>
-            <label>Отдел работы</label><br>
-                <select name="id_branch" id="id_branch">
-                {% for el in Branch %}
-                  <option value="{{ el.name }}">{{ el.name }}</option><br>
-                 {% endfor %}
-              </select>
-        </p>
+    <p class="mb-3">
+      <label>Отдел работы</label>
+      <select name="id_branch" id="id_branch">
+        {% for el in Branch %}
+        <option value="{{ el.name }}">{{ el.name }}</option>
 
-        <input type="submit" value="Сохранить" >
-    </form>
+        {% endfor %}
+      </select>
+    </p>
+
+    <input class="btn btn-warning" type="submit" value="Сохранить">
+  </form>
+  </div>
 </div>
 {% endblock %}
