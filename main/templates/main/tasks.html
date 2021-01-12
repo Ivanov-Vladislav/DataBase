@@ -32,8 +32,8 @@
                 <p class="text-uppercase text-warning">Описание:</p>
                 <p class="ml-3">{{ el.description }}</p>
               </div>
-              {% if  el.id_person == user_info or user_info == "user"%}
-                <a class="text-warning text-decoration-none" href="edit/{{el.id}}">Изменить</a>
+              {% if el.id_person == user_info or user_info == "user"%}
+              <a class="text-warning text-decoration-none" href="edit/{{el.id}}">Изменить</a>
               {% endif %}
             </div>
             <div class="d-flex justify-content-end subtitle-task mb-2">
@@ -48,21 +48,21 @@
             </div>
             <div class="d-flex">
               {% if user_info != "AnonymousUser" %}
-                {% if el.id_performing_person == "-" %}
-                <a class="btn btn-sm btn-success" href="{% url 'id_up_status' el.id %}">Принять</a>
-                {% elif el.id_status == Status_good %}
-                  {% if user_info == el.id_performing_person %}
-                    <a class="btn btn-sm btn-danger" href="{% url 'id_down_status' el.id %}">Отменить</a>
-                  {% endif %}
-                {% else %}
-                  {% if user_info == el.id_performing_person %}
-                    <a class="btn btn-sm btn-success" href="{% url 'id_up_status' el.id %}">Готово</a>
-                    <a class="btn btn-sm btn-danger ml-2" href="{% url 'id_down_status' el.id %}">Отменить</a>
-                  {% endif %}
-                {% endif %}
+              {% if el.id_performing_person == "-" %}
+              <a class="btn btn-sm btn-success" href="{% url 'id_up_status' el.id %}">Принять</a>
+              {% elif el.id_status == Status_good %}
+              {% if user_info == el.id_performing_person %}
+              <a class="btn btn-sm btn-danger" href="{% url 'id_down_status' el.id %}">Отменить</a>
               {% endif %}
-              {% if  el.id_person == user_info or user_info == "user"%}
-                <a class="btn btn-sm btn-danger ml-2" href="{% url 'delete_task' el.id %}">Удалить</a>
+              {% else %}
+              {% if user_info == el.id_performing_person %}
+              <a class="btn btn-sm btn-success" href="{% url 'id_up_status' el.id %}">Готово</a>
+              <a class="btn btn-sm btn-danger ml-2" href="{% url 'id_down_status' el.id %}">Отменить</a>
+              {% endif %}
+              {% endif %}
+              {% endif %}
+              {% if el.id_person == user_info or user_info == "user"%}
+              <a class="btn btn-sm btn-danger ml-2" href="{% url 'delete_task' el.id %}">Удалить</a>
               {% endif %}
             </div>
           </div>
@@ -71,6 +71,37 @@
     </div>
     {% endfor %}
   </div>
+  <nav class="mt-3">
+    <ul class="pagination justify-content-center">
+      {% if tasks.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ tasks.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {% endif %}
+      <li class="page-item"><span class="page-link page-num" href="#">{{ tasks.number }}</span></li>
+      {% if tasks.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ tasks.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
   {% else %}
   <h2 class="text-light text-center mt-5">Список задач пуст!</h2>
   {% endif %}

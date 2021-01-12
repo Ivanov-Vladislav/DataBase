@@ -115,3 +115,33 @@ a {
 .form-task input:focus {
     outline: none;
 }
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #FFD50D;
+    background-color: #121212;
+    border: none;
+}
+.page-link:hover {
+    color: #FFD50D;
+    background-color: #121212;
+    border: 1px solid #FFD50D;
+}
+.page-item.disabled .page-link {
+    color: #121212;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #121212;
+    border-color: #121212;
+}
+.page-num:hover {
+    border: none;
+}
+canvas {
+    display: block;
+    width: 100%;
+    height: 88vh;
+}

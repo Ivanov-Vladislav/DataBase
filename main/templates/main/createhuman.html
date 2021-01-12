@@ -1,27 +1,37 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-  Создать сотрудника
+Создать сотрудника
 {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h1>Личные данные</h1>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.first_name }}<br>
-      {{ form.second_name }}<br>
-
-      <select name="id_branch" id="id_branch">
-        {% for el in Branch %}
-          <option value="{{ el.name }}">{{ el.name }}</option><br>
-         {% endfor %}
-      </select>
-
-
+<div class="container">
+  <h1 class="h2 text-white text-center mt-4 mb-4">Личные данные</h1>
+  <div class="card col-6 p-3 mx-auto">
+    <div class="border border-warning p-5">
+      <form class="form-task" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="text-warning mb-4">Имя
+          {{ form.first_name }}
+        </div>
+        <div class="text-warning mb-4">Фмаилия
+          {{ form.second_name }}
+        </div>
+        <div class="d-flex mb-4">
+          <div class="text-warning mr-4">Специализация</div>
+          <select name="id_branch" id="id_branch">
+            {% for el in Branch %}
+            <option value="{{ el.name }}">{{ el.name }}</option>
+            <br>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="text-warning mb-2">Загрузите фотографию</div>
         {{ form.avatar }}
-      <button type="submit" class="btn btn-success">Добавить</button>
-      <span>{{ error }}</span>
-    </form>
+        <button type="submit" class="btn btn-success mt-4">Добавить</button>
+        <span>{{ error }}</span>
+      </form>
+    </div>
   </div>
+</div>
 {% endblock %}

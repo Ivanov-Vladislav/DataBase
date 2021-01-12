@@ -4,12 +4,16 @@ from .forms import Task1Form, HumanForm, AvatarForm
 import datetime
 import os
 from django.http import HttpResponseRedirect, HttpResponseNotFound
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 def index(request):
     return render(request, 'main/index.html')
 
+
 def about(request):
     return render(request, 'main/about.html')
+
 
 def tasks(request):
     humans = Human.objects.all()
@@ -23,10 +27,21 @@ def tasks(request):
                 break
         if humas_auth_bool == False:
             return redirect('createhuman')
-    tasks = Task1.objects.all()
+
+    task_list = Task1.objects.all()
+    paginator = Paginator(task_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        tasks = paginator.page(page)
+    except PageNotAnInteger:
+        tasks = paginator.page(1)
+    except EmptyPage:
+        tasks = paginator.page(paginator.num_pages)
 
     user_info = str(request.user)
     return render(request, 'main/tasks.html', {'title': 'Задачи', 'tasks': tasks, 'user_info':user_info, 'Status_good':Status_good, 'Status_norm':Status_norm})
+
 
 def createtask(request):
     Status = status.objects.all()
@@ -65,6 +80,7 @@ def createtask(request):
     else:
         return redirect('accounts/login/')
 
+
 def id_up_status(request, todo_id, cancel = False):
     if not (str(request.user) == 'AnonymousUser'):
         humans = Human.objects.all()
@@ -93,6 +109,7 @@ def id_up_status(request, todo_id, cancel = False):
         return redirect('http://127.0.0.1:8000/accounts/login/')
 
     return redirect('profile')
+
 
 def id_down_status(request, todo_id):
     if not (str(request.user) == 'AnonymousUser'):
@@ -126,6 +143,7 @@ def id_down_status(request, todo_id):
 
     return redirect('profile')
 
+
 def createhuman(request):
     error = ''
     Branch = branch.objects.all()
@@ -150,6 +168,7 @@ def createhuman(request):
         }
         return render(request, 'main/createhuman.html', context)
 
+
 def profile(request):
     try:
         user_info = request.user
@@ -166,6 +185,7 @@ def profile(request):
         return redirect('createhuman')
     except UnboundLocalError:
         return redirect('createhuman')
+
 
 def delete_task(request, id):
     task = Task1.objects.get(pk=id)
@@ -206,6 +226,7 @@ def edit_avatar(request):
         'error': error,
     }
     return render(request, 'main/edit_avatar.html', context)
+
 
 def edit_data(request):
     try:
