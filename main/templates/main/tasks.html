@@ -7,6 +7,12 @@
 {% block content %}
 <div class="container">
   {% if tasks %}
+
+  <form class="form-inline my-2 my-lg-0" action="{% url 'tasks' %}">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+    <button class="btn btn-outline-success mu-2 my-sm-0" type="submit">Search</button>
+  </form>
+
   <h2 class="text-white text-center mt-4">{{ title }}</h2>
   <div class="accordion mt-4" id="accordionTable">
     {% for el in tasks %}

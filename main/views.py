@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Task1, Human, status, branch, Avatar
 from .forms import Task1Form, HumanForm, AvatarForm
+from django.db.models import Q
 import datetime
 import os
 from django.http import HttpResponseRedirect, HttpResponseNotFound
@@ -16,19 +17,25 @@ def about(request):
 
 
 def tasks(request):
-    humans = Human.objects.all()
+    search_query = request.GET.get('search', '')
+    try:
+        if search_query:
+            task_list = Task1.objects.filter(Q(title__icontains = search_query) | Q(description__icontains = search_query)
+                                             | Q(date__icontains = search_query) | Q(id_person__icontains = search_query)
+                                             | Q(id_status = search_query)
+                                             | Q(id_performing_person__icontains = search_query))
+        else:
+            task_list = Task1.objects.all()
+    except ValueError:
+        task_list = []
+
+
     Status_good = status.objects.get(id=3)
     Status_norm = status.objects.get(id=2)
-    humas_auth_bool = False
     if not(str(request.user) == "AnonymousUser"):
-        for human in humans:
-            if (str(human.id_registarion) == str(request.user.id)):
-                humas_auth_bool = True
-                break
-        if humas_auth_bool == False:
+        if str(Human.objects.filter(id_registarion=request.user.id)) == "<QuerySet []>":
             return redirect('createhuman')
 
-    task_list = Task1.objects.all()
     paginator = Paginator(task_list, 10)
 
     page = request.GET.get('page')
