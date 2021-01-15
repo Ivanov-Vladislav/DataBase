@@ -58,3 +58,18 @@ class Avatar(models.Model):
         return self.title
 
 
+class team(models.Model):
+    name = models.CharField('Название', max_length=20)
+    date = models.CharField('Дата', max_length=10)
+    description = models.TextField('Описание')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Команда'
+        verbose_name_plural = 'Команды'
+
+class team_person(models.Model):
+    id_team = models.ForeignKey(team, on_delete=models.CASCADE)
+    id_person = models.ForeignKey(Human, on_delete=models.CASCADE)

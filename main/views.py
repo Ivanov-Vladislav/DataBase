@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Task1, Human, status, branch, Avatar
-from .forms import Task1Form, HumanForm, AvatarForm
+from .models import Task1, Human, status, branch, Avatar, team, team_person
+from .forms import Task1Form, HumanForm, AvatarForm, Team_Person_Form
 from django.db.models import Q
 import datetime
 import os
@@ -18,6 +18,7 @@ def about(request):
 def tasks(request, order_like='title'):
     search_query = request.GET.get('search', '')
     order_like = request.GET.get('order_like', '')
+
     try:
         if search_query:
             task_list = Task1.objects.filter(Q(title__icontains = search_query) | Q(description__icontains = search_query)
@@ -28,8 +29,19 @@ def tasks(request, order_like='title'):
             task_list = Task1.objects.all()
     except ValueError:
         task_list = []
+
     if order_like:
         task_list = task_list.order_by(order_like)
+
+    self_person = Human.objects.get(id_registarion=request.user.id)
+    team_persons = team_person.objects.get(id_person = self_person)
+
+    #for el in task_list:
+
+    #    team_creator = team_person.objects.get(id_person = el.id_person)
+    #    if team_creator.id_team == team_persons.id_team:
+    #        print("!")
+
 
     Status_good = status.objects.get(id=3)
     Status_norm = status.objects.get(id=2)
@@ -155,8 +167,11 @@ def id_down_status(request, todo_id):
 def createhuman(request):
     error = ''
     Branch = branch.objects.all()
+
     Human.objects.filter(id_registarion=request.user.id).delete()
     if not (str(request.user) == 'AnonymousUser'):
+        teams = team.objects.all()
+        print(teams)
         if request.method == 'POST':
             form = HumanForm(request.POST, request.FILES)
             if form.is_valid():
@@ -164,7 +179,9 @@ def createhuman(request):
                 post.id_branch = branch.objects.get(name = request.POST.get("id_branch"))
                 post.id_registarion = request.user.id
                 post.save()
-                return redirect('tasks')
+
+
+                return redirect('/create_person_team')
             else:
                 error = 'Форма неверная'
 
@@ -172,7 +189,8 @@ def createhuman(request):
         context = {
             'form': form,
             'error': error,
-            'Branch': Branch
+            'Branch': Branch,
+            'teams':teams,
         }
         return render(request, 'main/createhuman.html', context)
 
@@ -252,3 +270,26 @@ def edit_data(request):
             return render(request, "main/edit_data.html", {'title': 'Редактирование профиля', "human": human, 'Branch': Branch})
     except human.DoesNotExist:
         return HttpResponseNotFound("<h2>Human not found</h2>")
+
+def create_person_team(request):
+    error = ''
+
+    if not (str(request.user) == 'AnonymousUser'):
+        teams = team.objects.all()
+        #print(teams)
+        if request.method == 'POST':
+
+            form = Team_Person_Form()
+            post = form.save(commit=False)
+            post.id_team = team.objects.get(name=request.POST.get("id_team"))
+            post.id_person = Human.objects.get(id_registarion=request.user.id)
+            print(post)
+            post.save()
+
+
+            return redirect('tasks')
+
+        context = {
+            'teams': teams,
+        }
+        return render(request, 'main/create_person_team.html', context)

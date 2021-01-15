@@ -16,6 +16,7 @@ urlpatterns = [
     path('edit/<int:id>/', views.edit),
     path('edit_avatar/', views.edit_avatar),
     path('edit_data/', views.edit_data),
+    path('create_person_team/', views.create_person_team),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

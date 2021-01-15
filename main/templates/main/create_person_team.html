@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Выберите компанию
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="card col-6 p-3 mx-auto">
+    <div class="border border-warning p-5">
+      <form class="form-task" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="d-flex mb-4">
+          <div class="text-warning mr-4">Команда</div>
+          <select name="id_team" id="id_team">
+            {% for el in teams %}
+            <option value="{{ el.name }}">{{ el.name }}</option>
+            <br>
+            {% endfor %}
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-4">Добавить</button>
+        <span>{{ error }}</span>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
