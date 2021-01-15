@@ -15,9 +15,9 @@ def index(request):
 def about(request):
     return render(request, 'main/about.html')
 
-
-def tasks(request):
+def tasks(request, order_like='title'):
     search_query = request.GET.get('search', '')
+    order_like = request.GET.get('order_like', '')
     try:
         if search_query:
             task_list = Task1.objects.filter(Q(title__icontains = search_query) | Q(description__icontains = search_query)
@@ -28,7 +28,8 @@ def tasks(request):
             task_list = Task1.objects.all()
     except ValueError:
         task_list = []
-
+    if order_like:
+        task_list = task_list.order_by(order_like)
 
     Status_good = status.objects.get(id=3)
     Status_norm = status.objects.get(id=2)

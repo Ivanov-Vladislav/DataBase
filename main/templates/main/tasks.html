@@ -13,6 +13,25 @@
     <button class="btn btn-outline-success mu-2 my-sm-0" type="submit">Search</button>
   </form>
 
+  <form class="form-inline my-2 my-lg-0" action="{% url 'tasks' %}">
+   <p><select  name="order_like">
+    <option disabled>Выберите вариант сортировка</option>
+    <option value="title">title A-Z</option>
+    <option selected value="-title">title Z-A</option>
+    <option value="description">description A-Z</option>
+    <option value="-description">description Z-A</option>
+    <option value="date">date Old-New</option>
+    <option selected value="-date">date New-Old</option>
+    <option value="id_person">Creator A-Z</option>
+    <option value="-id_person">Creator Z-A</option>
+    <option value="id_status">Status Z-A</option>
+    <option value="-id_status">Status A-Z</option>
+    <option value="id_performing_person">performing_person A-Z</option>
+    <option value="-id_performing_person">performing_person Z-A</option>
+   </select></p>
+   <button class="btn btn-outline-success mu-2 my-sm-0" type="submit">Сортировать</button>
+  </form>
+
   <h2 class="text-white text-center mt-4">{{ title }}</h2>
   <div class="accordion mt-4" id="accordionTable">
     {% for el in tasks %}
