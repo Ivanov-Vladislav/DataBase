@@ -35,6 +35,7 @@
   <h2 class="text-white text-center mt-4">{{ title }}</h2>
   <div class="accordion mt-4" id="accordionTable">
     {% for el in tasks %}
+    {% if el.id in list_to_view %}
     <div class="card text-white">
       <a class="text-white text-decoration-none" type="button" data-toggle="collapse" data-target="#id{{ el.id }}"
          aria-expanded="true" aria-controls="collapseOne" href="#">
@@ -62,7 +63,9 @@
               {% endif %}
             </div>
             <div class="d-flex justify-content-end subtitle-task mb-2">
-              <span>{{ el.id_person }}</span>
+              <span>{{ el.id_person.first_name }}</span>
+              <span>&nbsp;</span>
+              <span>{{ el.id_person.second_name }}</span>
               <span class="ml-2">{{ el.date }}</span>
             </div>
           </div>
@@ -94,6 +97,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
     {% endfor %}
   </div>
   <nav class="mt-3">

@@ -1,29 +1,6 @@
 from django.db import models
+from datetime import date
 
-class status(models.Model):
-    name = models.CharField('Наименование статуса', max_length=12)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Статус'
-        verbose_name_plural = 'Статусы'
-
-class Task1(models.Model):
-    title = models.CharField('Название', max_length=25)
-    description = models.TextField('Описание')
-    date = models.CharField('Дата', max_length=10)
-    id_person = models.CharField('Создатель', max_length=10)
-    id_status = models.ForeignKey(status,  on_delete=models.CASCADE)
-    id_performing_person = models.CharField('Исполнитель', max_length=20)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Задача'
-        verbose_name_plural = 'Задачи'
 
 class branch(models.Model):
     name = models.CharField('Наименование отдела', max_length=12)
@@ -50,6 +27,32 @@ class Human(models.Model):
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
 
+class status(models.Model):
+    name = models.CharField('Наименование статуса', max_length=12)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Статус'
+        verbose_name_plural = 'Статусы'
+
+class Task1(models.Model):
+    title = models.CharField('Название', max_length=25)
+    description = models.TextField('Описание')
+    date = models.DateField(("Date"), default=date.today)
+    id_person = models.ForeignKey(Human,  on_delete=models.CASCADE)
+    id_status = models.ForeignKey(status,  on_delete=models.CASCADE)
+    id_performing_person = models.CharField('Исполнитель', max_length=20)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Задача'
+        verbose_name_plural = 'Задачи'
+
+
 class Avatar(models.Model):
     title = models.CharField('Имя', max_length=10)
     avatar = models.ImageField(null=True, blank=True, upload_to="images/")
@@ -60,7 +63,7 @@ class Avatar(models.Model):
 
 class team(models.Model):
     name = models.CharField('Название', max_length=20)
-    date = models.CharField('Дата', max_length=10)
+    date = models.DateField(("Date"), default=date.today)
     description = models.TextField('Описание')
 
     def __str__(self):
