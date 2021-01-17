@@ -145,3 +145,13 @@ canvas {
     width: 100%;
     height: 88vh;
 }
+.input-search {
+    background-color: transparent;
+    color: #FFD50D;
+    border: none;
+    border-bottom: 1px solid #FFD50D;
+    border-radius: 0;
+}
+.input-search option {
+    background-color: transparent;
+}

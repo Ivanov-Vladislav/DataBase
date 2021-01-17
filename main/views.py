@@ -52,7 +52,7 @@ def tasks(request, order_like='title'):
         if str(Human.objects.filter(id_registarion=request.user.id)) == "<QuerySet []>":
             return redirect('createhuman')
 
-    paginator = Paginator(task_list, 10)
+    paginator = Paginator(task_list, 20)
 
     page = request.GET.get('page')
     try:
