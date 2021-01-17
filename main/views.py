@@ -15,55 +15,88 @@ def index(request):
 def about(request):
     return render(request, 'main/about.html')
 
+def createhuman(request):
+    #print(Human.objects.get(id_registarion=request.user.id))
+
+    error = ''
+    Branch = branch.objects.all()
+
+    Human.objects.filter(id_registarion=request.user.id).delete()
+    if not (str(request.user) == 'AnonymousUser'):
+        teams = team.objects.all()
+        if request.method == 'POST':
+            form = HumanForm(request.POST, request.FILES)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.id_branch = branch.objects.get(name = request.POST.get("id_branch"))
+                post.id_registarion = request.user.id
+                post.save()
+
+
+                return redirect('/create_person_team')
+            else:
+                error = 'Форма неверная'
+
+        form = HumanForm()
+        context = {
+            'form': form,
+            'error': error,
+            'Branch': Branch,
+            'teams':teams,
+        }
+        return render(request, 'main/createhuman.html', context)
+
+
 def tasks(request, order_like='title'):
-    search_query = request.GET.get('search', '')
-    order_like = request.GET.get('order_like', '')
+    if request.user.is_authenticated:
+        search_query = request.GET.get('search', '')
+        order_like = request.GET.get('order_like', '')
 
-    try:
-        if search_query:
-            task_list = Task1.objects.filter(Q(title__icontains = search_query) | Q(description__icontains = search_query)
-                                             | Q(date__icontains = search_query) | Q(id_person__icontains = search_query)
-                                             | Q(id_status = search_query)
-                                             | Q(id_performing_person__icontains = search_query))
-        else:
-            task_list = Task1.objects.all()
-    except ValueError:
-        task_list = []
+        try:
+            if search_query:
+                task_list = Task1.objects.filter(Q(title__icontains = search_query) | Q(description__icontains = search_query)
+                                                | Q(id_performing_person__icontains = search_query))
+            else:
+                task_list = Task1.objects.all()
+        except ValueError:
+            task_list = []
 
-    if order_like:
-        task_list = task_list.order_by(order_like)
+        if order_like:
+            task_list = task_list.order_by(order_like)
 
-    self_person = Human.objects.get(id_registarion=request.user.id) # это мы в таблице людей
-    our_team_persons = team_person.objects.get(id_person = self_person) # мы в таблице люди_команды
-    #print("Наша команда - ", our_team_persons.id_team)
+        if not(str(request.user) == "AnonymousUser"):
+            if str(Human.objects.filter(id_registarion=request.user.id)) == "<QuerySet []>":
+                return redirect('createhuman')
 
-    list_to_view = []
-    for el in task_list:
-        self_team_person = team_person.objects.get(id_person = el.id_person)
-        #print("команда Таска - ", self_team_person.id_team)
-        if our_team_persons.id_team == self_team_person.id_team:
-            list_to_view.append(el.id)
+        self_person = Human.objects.get(id_registarion=request.user.id) # это мы в таблице людей
+        our_team_persons = team_person.objects.get(id_person = self_person) # мы в таблице люди_команды
+        #print("Наша команда - ", our_team_persons.id_team)
+
+        list_to_view = []
+        for el in task_list:
+            self_team_person = team_person.objects.get(id_person = el.id_person)
+            #print("команда Таска - ", self_team_person.id_team)
+            if our_team_persons.id_team == self_team_person.id_team:
+                list_to_view.append(el.id)
 
 
 
-    Status_good = status.objects.get(id=3)
-    Status_norm = status.objects.get(id=2)
-    if not(str(request.user) == "AnonymousUser"):
-        if str(Human.objects.filter(id_registarion=request.user.id)) == "<QuerySet []>":
-            return redirect('createhuman')
+        Status_good = status.objects.get(id=3)
+        Status_norm = status.objects.get(id=2)
+        paginator = Paginator(task_list, 20)
 
-    paginator = Paginator(task_list, 20)
+        page = request.GET.get('page')
+        try:
+            tasks = paginator.page(page)
+        except PageNotAnInteger:
+            tasks = paginator.page(1)
+        except EmptyPage:
+            tasks = paginator.page(paginator.num_pages)
 
-    page = request.GET.get('page')
-    try:
-        tasks = paginator.page(page)
-    except PageNotAnInteger:
-        tasks = paginator.page(1)
-    except EmptyPage:
-        tasks = paginator.page(paginator.num_pages)
-
-    user_info = str(request.user)
-    return render(request, 'main/tasks.html', {'title': 'Задачи', 'tasks': tasks, 'user_info':user_info, 'Status_good':Status_good, 'Status_norm':Status_norm, 'list_to_view':list_to_view})
+        user_info = str(request.user)
+        return render(request, 'main/tasks.html', {'title': 'Задачи', 'tasks': tasks, 'user_info':user_info, 'Status_good':Status_good, 'Status_norm':Status_norm, 'list_to_view':list_to_view})
+    else:
+        return redirect('http://127.0.0.1:8000/accounts/login/')
 
 
 def createtask(request):
@@ -132,7 +165,7 @@ def id_up_status(request, todo_id, cancel = False):
     else:
         return redirect('http://127.0.0.1:8000/accounts/login/')
 
-    return redirect('profile')
+    return redirect('tasks')
 
 
 def id_down_status(request, todo_id):
@@ -165,38 +198,7 @@ def id_down_status(request, todo_id):
     else:
         return redirect('http://127.0.0.1:8000/accounts/login/')
 
-    return redirect('profile')
-
-
-def createhuman(request):
-    error = ''
-    Branch = branch.objects.all()
-
-    Human.objects.filter(id_registarion=request.user.id).delete()
-    if not (str(request.user) == 'AnonymousUser'):
-        teams = team.objects.all()
-        print(teams)
-        if request.method == 'POST':
-            form = HumanForm(request.POST, request.FILES)
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.id_branch = branch.objects.get(name = request.POST.get("id_branch"))
-                post.id_registarion = request.user.id
-                post.save()
-
-
-                return redirect('/create_person_team')
-            else:
-                error = 'Форма неверная'
-
-        form = HumanForm()
-        context = {
-            'form': form,
-            'error': error,
-            'Branch': Branch,
-            'teams':teams,
-        }
-        return render(request, 'main/createhuman.html', context)
+    return redirect('tasks')
 
 
 def profile(request):
