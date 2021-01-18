@@ -83,7 +83,7 @@ def tasks(request, order_like='title'):
 
         Status_good = status.objects.get(id=3)
         Status_norm = status.objects.get(id=2)
-        paginator = Paginator(task_list, 20)
+        paginator = Paginator(task_list, 30)
 
         page = request.GET.get('page')
         try:
