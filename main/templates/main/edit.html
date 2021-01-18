@@ -6,18 +6,18 @@
 
 
 {% block content %}
-<div class="main-section form-block">
-    <form method="POST" class="form">
+<div class="container">
+    <form method="POST">
         {% csrf_token %}
-        <p class="mb-3">
-            <label class="m-0">Введите название</label>
+        <p>
+            <label>Введите название</label><br>
             <input type="text" name="title" value="{{todo.title}}" />
         </p>
-        <p class="mb-3">
-            <label class="m-0">Введите описание</label>
+        <p>
+            <label>Введите описание</label><br>
             <input type="text" name="description" value="{{todo.description}}" />
         </p>
-        <input class="btn btn-warning" type="submit" value="Сохранить" >
+        <input type="submit" value="Сохранить" >
     </form>
 </div>
 {% endblock %}

@@ -38,11 +38,7 @@ class status(models.Model):
         verbose_name_plural = 'Статусы'
 
 class Task1(models.Model):
-<<<<<<< HEAD
-    title = models.CharField('Название', max_length=100)
-=======
     title = models.CharField('Название', max_length=50)
->>>>>>> 7b05a2506e9e04aaee2388b926d607475b0cde69
     description = models.TextField('Описание')
     date = models.DateField(("Date"), default=date.today)
     id_person = models.ForeignKey(person,  on_delete=models.CASCADE)
