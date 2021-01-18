@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Task1, Human, status, branch, Avatar, team, team_person
+from .models import Task1, person, status, branch, Avatar, team, team_person
 from .forms import Task1Form, HumanForm, AvatarForm, Team_Person_Form
 from django.db.models import Q
 import datetime
@@ -21,7 +21,7 @@ def createhuman(request):
     error = ''
     Branch = branch.objects.all()
 
-    Human.objects.filter(id_registarion=request.user.id).delete()
+    person.objects.filter(id_registarion=request.user.id).delete()
     if not (str(request.user) == 'AnonymousUser'):
         teams = team.objects.all()
         if request.method == 'POST':
@@ -65,10 +65,10 @@ def tasks(request, order_like='title'):
             task_list = task_list.order_by(order_like)
 
         if not(str(request.user) == "AnonymousUser"):
-            if str(Human.objects.filter(id_registarion=request.user.id)) == "<QuerySet []>":
+            if str(person.objects.filter(id_registarion=request.user.id)) == "<QuerySet []>":
                 return redirect('createhuman')
 
-        self_person = Human.objects.get(id_registarion=request.user.id) # это мы в таблице людей
+        self_person = person.objects.get(id_registarion=request.user.id) # это мы в таблице людей
         our_team_persons = team_person.objects.get(id_person = self_person) # мы в таблице люди_команды
         #print("Наша команда - ", our_team_persons.id_team)
 
@@ -101,7 +101,7 @@ def tasks(request, order_like='title'):
 
 def createtask(request):
     Status = status.objects.all()
-    humans = Human.objects.all()
+    humans = person.objects.all()
     humas_auth_bool = False
     if not (str(request.user) == "AnonymousUser"):
         for human in humans:
@@ -116,7 +116,7 @@ def createtask(request):
             form = Task1Form(request.POST)
             if form.is_valid():
                 post = form.save(commit=False)
-                post.id_person = Human.objects.get(id_registarion=request.user.id)
+                post.id_person = person.objects.get(id_registarion=request.user.id)
                 #post.id_person = request.user
                 #date_now = str(datetime.datetime.now())
                 #post.date = date_now[0:10]
@@ -140,7 +140,7 @@ def createtask(request):
 
 def id_up_status(request, todo_id, cancel = False):
     if not (str(request.user) == 'AnonymousUser'):
-        humans = Human.objects.all()
+        humans = person.objects.all()
         Status = status.objects.all()
 
         humas_auth_bool = False
@@ -170,7 +170,7 @@ def id_up_status(request, todo_id, cancel = False):
 
 def id_down_status(request, todo_id):
     if not (str(request.user) == 'AnonymousUser'):
-        humans = Human.objects.all()
+        humans = person.objects.all()
         Status = status.objects.all()
 
         humas_auth_bool = False
@@ -206,10 +206,10 @@ def profile(request):
         Status_good = status.objects.get(id=3)
         Status_norm = status.objects.get(id=2)
         tasks = Task1.objects.all()
-        self_human = Human.objects.get(id_registarion = request.user.id)
+        self_human = person.objects.get(id_registarion = request.user.id)
         user_info = str(request.user)
 
-        self_person = Human.objects.get(id_registarion=request.user.id)  # это мы в таблице людей
+        self_person = person.objects.get(id_registarion=request.user.id)  # это мы в таблице людей
         team_persons = team_person.objects.get(id_person=self_person)  # мы в таблице люди_команды
         self_team = team_persons.id_team
 
@@ -242,7 +242,7 @@ def edit(request, id):
 
 def edit_avatar(request):
     error = ''
-    human_temp = Human.objects.get(id_registarion=request.user.id)
+    human_temp = person.objects.get(id_registarion=request.user.id)
     if request.method == 'POST':
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
@@ -264,7 +264,7 @@ def edit_avatar(request):
 def edit_data(request):
     try:
         Branch = branch.objects.all()
-        human = Human.objects.get(id_registarion=request.user.id)
+        human = person.objects.get(id_registarion=request.user.id)
         if request.method == "POST":
             human.first_name = request.POST.get("first_name")
             human.second_name = request.POST.get("second_name")
@@ -289,7 +289,7 @@ def create_person_team(request):
             form = Team_Person_Form()
             post = form.save(commit=False)
             post.id_team = team.objects.get(name=request.POST.get("id_team"))
-            post.id_person = Human.objects.get(id_registarion=request.user.id)
+            post.id_person = person.objects.get(id_registarion=request.user.id)
             print(post)
             post.save()
 

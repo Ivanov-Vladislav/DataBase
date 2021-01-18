@@ -1,4 +1,4 @@
-from .models import Human, Task1, status, branch, Avatar, team, team_person
+from .models import person, Task1, status, branch, Avatar, team, team_person
 from django.forms import ModelForm, TextInput
 
 class Task1Form(ModelForm):
@@ -31,7 +31,7 @@ class statusform(ModelForm):
 
 class HumanForm(ModelForm):
     class Meta:
-        model = Human
+        model = person
         fields = ["first_name", "second_name", "avatar"]
 
 class branchform(ModelForm):
